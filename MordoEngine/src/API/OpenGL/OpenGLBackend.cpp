@@ -16,7 +16,7 @@ void OpenGLBackend::Init(int width, int height)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "V1", NULL, NULL);
+	window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "MordoEngine", NULL, NULL);
 
 	if (!window)
 	{
@@ -41,9 +41,6 @@ void OpenGLBackend::Init(int width, int height)
 
 GLFWwindow* OpenGLBackend::GetGLFWwindow()
 {
-	if (!window)
-		return nullptr;
-
 	return window;
 }
 
@@ -58,6 +55,11 @@ bool OpenGLBackend::WindowShouldClose()
 {
 	return glfwWindowShouldClose(window);
 }
+
+void OpenGLBackend::CloseWindow() {
+	glfwSetWindowShouldClose(window, true);
+}
+
 void OpenGLBackend::SwapBuffers()
 {
 	glfwSwapBuffers(window);

@@ -104,12 +104,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\OpenGL\MordoEngine\MordoEngine\vendor\glad\include;D:\OpenGL\MordoEngine\MordoEngine\vendor\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)MordoEngine\vendor\glm;$(SolutionDir)MordoEngine\vendor\glad\include;$(SolutionDir)MordoEngine\vendor\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\OpenGL\MordoEngine\MordoEngine\vendor\GLFW\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)MordoEngine\vendor\GLFW\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -121,26 +122,38 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\OpenGL\MordoEngine\MordoEngine\vendor\glad\include;D:\OpenGL\MordoEngine\MordoEngine\vendor\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)MordoEngine\vendor\glm;$(SolutionDir)MordoEngine\vendor\glad\include;$(SolutionDir)MordoEngine\vendor\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\OpenGL\MordoEngine\MordoEngine\vendor\GLFW\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)MordoEngine\vendor\GLFW\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\API\OpenGL\OpenGLBackend.cpp" />
+    <ClCompile Include="src\Core\Shader\Shader.cpp" />
     <ClCompile Include="src\Engine.cpp" />
+    <ClCompile Include="src\Input\Input.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Renderer\TriangleRenderer.cpp" />
     <ClCompile Include="vendor\glad\src\glad.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\API\OpenGL\OpenGLBackend.h" />
+    <ClInclude Include="src\Core\Shader\Shader.h" />
     <ClInclude Include="src\Engine.h" />
+    <ClInclude Include="src\Input\Input.h" />
+    <ClInclude Include="src\Renderer\Triangle.h" />
+    <ClInclude Include="src\Renderer\TriangleRenderer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\shaders\triangle.fs" />
+    <None Include="res\shaders\triangle.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

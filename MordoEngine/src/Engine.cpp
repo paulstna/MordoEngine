@@ -1,13 +1,33 @@
 #include "Engine.h"
+#include <random>
 #include "API/OpenGL/OpenGLBackend.h"
+#include "Input/Input.h"
+#include "Renderer/TriangleRenderer.h"
 
 void Engine::Run()
 {
 	OpenGLBackend::Init(800, 800);
+	Input::Init(OpenGLBackend::GetGLFWwindow());
+	TriangleRenderer triangleRenderer;
+
+	float lastTime = 0.0f;
 
 	while (!OpenGLBackend::WindowShouldClose())
 	{
+		float currentTime = glfwGetTime();
+		float deltaTime = currentTime - lastTime;
+		lastTime = currentTime;
+
 		OpenGLBackend::Update();
+
+		Input::Update();
+		if (Input::KeyPressed(GLFW_KEY_ESCAPE)) {
+			OpenGLBackend::CloseWindow();
+		}
+
+		triangleRenderer.Update(deltaTime);
+		triangleRenderer.Render();
+
 		OpenGLBackend::SwapBuffers();
 	}
 

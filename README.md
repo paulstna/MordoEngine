@@ -16,10 +16,11 @@ The codebase evolves over time as I learn new concepts, improve the architecture
 - C++
 - OpenGL
 - GLFW
+- GLM
 
 ## Project Status
-🚧 Work in progress  
-This repository continuously evolves as part of my learning process.
+After several space key presses, dynamically generated triangles 
+![Triangle Renderer](imgs/2026-01-25.png)
 
 ## Notes
 This is an educational and personal project focused on learning and experimentation.  

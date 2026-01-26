@@ -13,6 +13,7 @@ public:
 	static void Init(int width, int height);
 	static GLFWwindow* GetGLFWwindow();
 	static bool WindowShouldClose();
+	static void CloseWindow();
 	static void SwapBuffers();
 
 private:
