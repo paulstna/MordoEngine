@@ -17,11 +17,11 @@ The codebase evolves over time as I learn new concepts, improve the architecture
 - OpenGL
 - GLFW
 - GLM
+- stb_image
 
 ## Project Status
-After several space key presses, dynamically generated triangles
-Now textured using stb_image and a custom Texture class: 
-![Triangle Renderer](imgs/2026-01-27.png)
+After several space key presses, dynamically generated squares, textured using stb_image and a custom Texture class: 
+![Triangle Renderer](imgs/2026-01-28.png)
 
 ## Notes
 This is an educational and personal project focused on learning and experimentation.  

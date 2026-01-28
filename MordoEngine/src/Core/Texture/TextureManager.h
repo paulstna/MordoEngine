@@ -16,6 +16,5 @@ public:
 
 private:
     static std::vector<Texture> textures;
-    static void LoadTexture(const std::string& path);
     static std::unordered_map<std::string, TextureID> pathToId;
 };

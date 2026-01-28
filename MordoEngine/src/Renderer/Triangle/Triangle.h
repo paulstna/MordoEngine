@@ -1,6 +1,6 @@
 #pragma once
-#include "../Core/Texture/TextureManager.h"
-#include "../Core/Shader/Shader.h"
+#include "../../Core/Texture/TextureManager.h"
+#include "../../Core/Shader/Shader.h"
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
 

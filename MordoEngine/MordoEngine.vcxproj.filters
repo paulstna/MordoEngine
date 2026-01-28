@@ -27,7 +27,7 @@
     <ClCompile Include="vendor\glad\src\glad.c">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="src\Renderer\TriangleRenderer.cpp">
+    <ClCompile Include="src\Renderer\Triangle\TriangleRenderer.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="src\Core\Shader\Shader.cpp">
@@ -45,7 +45,13 @@
     <ClCompile Include="src\Core\Texture\TextureManager.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="src\Renderer\Triangle.cpp">
+    <ClCompile Include="src\Renderer\Triangle\Triangle.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Renderer\Square\SquareRenderer.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Renderer\Square\Square.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,10 +62,10 @@
     <ClInclude Include="src\Engine.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="src\Renderer\TriangleRenderer.h">
+    <ClInclude Include="src\Renderer\Triangle\TriangleRenderer.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="src\Renderer\Triangle.h">
+    <ClInclude Include="src\Renderer\Triangle\Triangle.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="src\Core\Shader\Shader.h">
@@ -77,10 +83,16 @@
     <ClInclude Include="src\Core\Texture\TextureManager.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="src\Renderer\Square\Square.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Renderer\Square\SquareRenderer.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\shaders\triangle.vs" />
-    <None Include="res\shaders\triangle.fs" />
+    <None Include="res\shaders\basic.vs" />
+    <None Include="res\shaders\basic.fs" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\bricks.png">

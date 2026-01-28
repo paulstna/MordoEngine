@@ -143,8 +143,10 @@
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\Input\Input.cpp" />
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\Renderer\Triangle.cpp" />
-    <ClCompile Include="src\Renderer\TriangleRenderer.cpp" />
+    <ClCompile Include="src\Renderer\Square\Square.cpp" />
+    <ClCompile Include="src\Renderer\Square\SquareRenderer.cpp" />
+    <ClCompile Include="src\Renderer\Triangle\Triangle.cpp" />
+    <ClCompile Include="src\Renderer\Triangle\TriangleRenderer.cpp" />
     <ClCompile Include="vendor\glad\src\glad.c" />
   </ItemGroup>
   <ItemGroup>
@@ -155,12 +157,14 @@
     <ClInclude Include="src\Core\Texture\TextureManager.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\Input\Input.h" />
-    <ClInclude Include="src\Renderer\Triangle.h" />
-    <ClInclude Include="src\Renderer\TriangleRenderer.h" />
+    <ClInclude Include="src\Renderer\Square\Square.h" />
+    <ClInclude Include="src\Renderer\Square\SquareRenderer.h" />
+    <ClInclude Include="src\Renderer\Triangle\Triangle.h" />
+    <ClInclude Include="src\Renderer\Triangle\TriangleRenderer.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\shaders\triangle.fs" />
-    <None Include="res\shaders\triangle.vs" />
+    <None Include="res\shaders\basic.fs" />
+    <None Include="res\shaders\basic.vs" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\bricks.png" />

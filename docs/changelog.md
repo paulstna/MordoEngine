@@ -20,3 +20,7 @@
 - Updated TriangleRenderer to apply textures to triangles
 - Updated triangle render implementation
 - Updated shader class to set uniform variables  
+
+## 2026-01-28
+-Added a Square class for rendering textured squares
+-Added a SquareRenderer to dynamically generate and render textured squares using indexed buffers
