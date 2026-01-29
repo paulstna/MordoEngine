@@ -22,5 +22,7 @@
 - Updated shader class to set uniform variables  
 
 ## 2026-01-28
--Added a Square class for rendering textured squares
--Added a SquareRenderer to dynamically generate and render textured squares using indexed buffers
+- Added Square class for rendering textured squares
+- Implemented SquareRenderer to dynamically generate and render textured squares using indexed buffers
+- Replaced TriangleRenderer and Triangle with SquareRenderer
+- Refactored resource managers to use a generic template-based Manager<T> (e.g. textures, shaders)

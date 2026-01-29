@@ -1,13 +1,15 @@
 #include "Square.h"
+#include "../../Core/Texture/Texture.h"
+#include "../../Core/Managers/Manager.h"
 
 Square::Square(glm::vec3 position, float size, glm::vec3 color, glm::vec3 velocity)
 	: position(position), size(size), color(color), velocity(velocity)
 {
-	textureID = TextureManager::Load("res/textures/bricks.png");
+	textureID = "bricks";
 }
 
 void Square::Update(float deltaTime) {
-
+	// Update Square
 }
 
 void Square::Render(const Shader& shader) {
@@ -16,9 +18,9 @@ void Square::Render(const Shader& shader) {
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
 
-void Square::Render(const Shader& shader, TextureID defaultTextureID) {
+void Square::Render(const Shader& shader, const std::string& defaultTextureID) {
 	if (textureID != defaultTextureID) {
-		TextureManager::Get(textureID).Use();
+		Manager<Texture>::Get(textureID).Use();
 	}
 	Render(shader);
 }

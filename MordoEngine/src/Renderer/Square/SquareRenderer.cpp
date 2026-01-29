@@ -1,9 +1,14 @@
 #include "SquareRenderer.h"
 #include "../../Input/Input.h"
+#include "../../Core/Managers/Manager.h"
+#include "../../Core/Texture/Texture.h"
+#include "../../Core/Shader/Shader.h"
+#include <iostream>
 
-SquareRenderer::SquareRenderer() : shader("res/shaders/basic.vs", "res/shaders/basic.fs"), gen(std::random_device{}()) {
+SquareRenderer::SquareRenderer() : gen(std::random_device{}()) {
 
-	defaultTextureID = TextureManager::Load("res/textures/bricks.png");
+	defaultShaderID = "basic";
+	defaultTextureID = "bricks";
 	// base triangle // texcoords
 	float vertices[] = {
 	 0.5f,  0.5f, 0.0f, 1.0f, 0.0f,  // top right
@@ -11,7 +16,7 @@ SquareRenderer::SquareRenderer() : shader("res/shaders/basic.vs", "res/shaders/b
 	-0.5f, -0.5f, 0.0f, 0.0f, 1.0f,  // bottom left
 	-0.5f,  0.5f, 0.0f, 0.0f, 0.0f   // top left 
 	};
-	unsigned int indices[] = {  
+	unsigned int indices[] = {
 		0, 1, 3,                     // first triangle
 		1, 2, 3                      // second triangle
 	};
@@ -47,7 +52,7 @@ SquareRenderer::~SquareRenderer() {
 	glDeleteVertexArrays(1, &vao);
 }
 
-void SquareRenderer::AddRandomTriangle() {
+void SquareRenderer::AddRandomSquare() {
 	std::uniform_real_distribution<float> pos(-1.0f, 1.0f);
 	std::uniform_real_distribution<float> sizeDist(0.1f, 0.5f);
 	std::uniform_real_distribution<float> color(0.0f, 1.0f);
@@ -71,20 +76,17 @@ void SquareRenderer::Update(float deltaTime) {
 void SquareRenderer::HandleInputs() {
 	if (Input::KeyPressed(GLFW_KEY_SPACE))
 	{
-		AddRandomTriangle();
+		AddRandomSquare();
 	}
 }
 
 void SquareRenderer::Render() {
-	shader.Use();
+	Manager<Shader>::Get(defaultShaderID).Use();
+
 	glBindVertexArray(vao);
-
-	TextureManager::Get(defaultTextureID).Use();
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	Manager<Texture>::Get(defaultTextureID).Use();
 	for (Square& square : squares) {
-		square.Render(shader);
+		square.Render(Manager<Shader>::Get(defaultShaderID));
 	}
 	glBindVertexArray(0);
 }

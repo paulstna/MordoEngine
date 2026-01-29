@@ -5,8 +5,8 @@
 
 
 Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath) {
-	std::string vertexCode = readFile(FileSystem::getPath(vertexShaderPath));
-	std::string fragmentCode = readFile(FileSystem::getPath(fragmentShaderPath));
+	std::string vertexCode = readFile(vertexShaderPath);
+	std::string fragmentCode = readFile(fragmentShaderPath);
 
 	GLuint vertexShader = compileShader(GL_VERTEX_SHADER, vertexCode);
 	GLuint fragmentShader = compileShader(GL_FRAGMENT_SHADER, fragmentCode);
@@ -85,4 +85,21 @@ void Shader::setVec2(const std::string& name, const glm::vec2& value) const
 void Shader::setVec3(const std::string& name, const glm::vec3& value) const
 {
 	glUniform3fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
+}
+
+Shader::Shader(Shader&& other) noexcept
+	: ID(other.ID)
+{
+	other.ID = 0;
+}
+
+Shader& Shader::operator=(Shader&& other) noexcept {
+	if (this != &other) {
+		if (ID != 0) {
+			glDeleteProgram(ID);
+		}
+		ID = other.ID;
+		other.ID = 0;
+	}
+	return *this;
 }

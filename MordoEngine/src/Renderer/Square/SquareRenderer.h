@@ -1,19 +1,17 @@
 #pragma once
 #include <glad/glad.h>
-#include "../../Core/Texture/TextureManager.h"
-#include "../../Core/Shader/Shader.h"
 #include <vector>
-#include "Square.h"
 #include <random>
+#include "Square.h"
 
 class SquareRenderer {
 private:
 	GLuint vao, vbo, ebo;
 	std::vector<Square> squares;
-	Shader shader;
-	void AddRandomTriangle();
+	void AddRandomSquare();
 	void HandleInputs();
-	TextureID defaultTextureID;
+	std::string defaultTextureID;
+	std::string defaultShaderID;
 	std::mt19937 gen;
 public:
 	SquareRenderer();

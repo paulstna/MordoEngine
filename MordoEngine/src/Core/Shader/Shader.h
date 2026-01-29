@@ -9,6 +9,10 @@ public:
 	GLuint ID;
 	Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
 	~Shader();
+	Shader(const Shader&) = delete;
+	Shader& operator=(const Shader&) = delete;
+	Shader(Shader&& other) noexcept;
+	Shader& operator=(Shader&& other) noexcept;
 	void Use() const;
 	void setFloat(const std::string& name, float value) const;
 	void setVec2(const std::string& name, const glm::vec2& value) const;

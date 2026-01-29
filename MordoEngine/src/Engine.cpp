@@ -2,16 +2,17 @@
 #include <random>
 #include "API/OpenGL/OpenGLBackend.h"
 #include "Input/Input.h"
-#include "Renderer/Triangle/TriangleRenderer.h"
 #include "Renderer/Square/SquareRenderer.h"
-#include "Core/Texture/TextureManager.h"
+#include "Core/Managers/Manager.h"
+#include "Core/Texture/Texture.h"
+#include "Core/Shader/Shader.h"
 
 void Engine::Run()
 {
 	OpenGLBackend::Init(800, 800);
 	Input::Init(OpenGLBackend::GetGLFWwindow());
-	TextureManager::Init();
-	//TriangleRenderer triangleRenderer;
+	Manager<Texture>::Init();
+	Manager<Shader>::Init();
 	SquareRenderer squareRenderer;
 
 	float lastTime = 0.0f;
@@ -29,14 +30,14 @@ void Engine::Run()
 			OpenGLBackend::CloseWindow();
 		}
 
-		//triangleRenderer.Update(deltaTime);
-		//triangleRenderer.Render();
-
 		squareRenderer.Update(deltaTime);
 		squareRenderer.Render();
 
 		OpenGLBackend::SwapBuffers();
 	}
 
+
+	Manager<Texture>::Clear();
+	Manager<Shader>::Clear();
 	OpenGLBackend::Terminate();
 }
