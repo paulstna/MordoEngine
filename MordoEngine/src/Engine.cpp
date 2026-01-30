@@ -2,7 +2,7 @@
 #include <random>
 #include "API/OpenGL/OpenGLBackend.h"
 #include "Input/Input.h"
-#include "Renderer/Square/SquareRenderer.h"
+#include "Renderer/Cube/CubeRenderer.h"
 #include "Core/Managers/Manager.h"
 #include "Core/Texture/Texture.h"
 #include "Core/Shader/Shader.h"
@@ -13,7 +13,7 @@ void Engine::Run()
 	Input::Init(OpenGLBackend::GetGLFWwindow());
 	Manager<Texture>::Init();
 	Manager<Shader>::Init();
-	SquareRenderer squareRenderer;
+	CubeRenderer cubeRenderer;
 
 	float lastTime = 0.0f;
 
@@ -30,8 +30,8 @@ void Engine::Run()
 			OpenGLBackend::CloseWindow();
 		}
 
-		squareRenderer.Update(deltaTime);
-		squareRenderer.Render();
+		cubeRenderer.Update(deltaTime);
+		cubeRenderer.Render();
 
 		OpenGLBackend::SwapBuffers();
 	}

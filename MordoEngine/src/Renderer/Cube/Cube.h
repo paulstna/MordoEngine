@@ -1,17 +1,20 @@
 #pragma once
 #include <glm/glm.hpp>
+#include "../../Camera/Camera.h"
 #include "../../Core/Shader/Shader.h"
 
-class Square {
+class Cube {
 public:
 	void Update(float deltaTime);
 	void Render(const Shader& shader);
 	void Render(const Shader& shader, const std::string& defaultTextureID);
-	Square(glm::vec3 position, float size, glm::vec3 color, glm::vec3 velocity);
+	Cube(glm::vec3 position, glm::vec3 size, glm::vec3 color, glm::vec3 rotationAxes);
 	std::string textureID;
+	float rotation = 0.0f;         
+	float angularVelocity = 90.0f;  
 private:
 	glm::vec3 position;
-	float size;
+	glm::vec3 size;
 	glm::vec3 color;
-	glm::vec3 velocity;
+	glm::vec3 rotationAxe;
 };
