@@ -4,7 +4,7 @@
 Camera::Camera(glm::vec3 position, unsigned int windowWidth, unsigned int windowHeight)
     : m_position(position), WINDOW_WIDTH(windowWidth), WINDOW_HEIGHT(windowHeight)
 {
-    LookAt(glm::vec3{0.0f});
+    LookAt(glm::vec3{ 5.0f, 50.0f, 5.0f });
 }
 
 void Camera::Update() {
@@ -103,7 +103,7 @@ const glm::mat4& Camera::GetInverseViewMatrix() const {
 glm::mat4 Camera::GetProjectionMatrix() const {
     return glm::perspective(glm::radians(m_zoom),
         static_cast<float>(WINDOW_WIDTH) / static_cast<float>(WINDOW_HEIGHT),
-        0.1f, 200.0f);
+        0.1f, 350.0f);
 }
 
 const glm::vec3& Camera::GetPosition() const {

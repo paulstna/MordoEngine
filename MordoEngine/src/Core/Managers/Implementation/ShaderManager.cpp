@@ -4,10 +4,10 @@
 
 template<>
 void Manager<Shader>::Init() {
-	resources.emplace("basic", 
+	resources.emplace("terrain", 
 		std::move(Shader(
-			FileSystem::getPath("res/shaders/basic.vs"), 
-			FileSystem::getPath("res/shaders/basic.fs"))
+			FileSystem::getPath("res/shaders/terrain.vs"), 
+			FileSystem::getPath("res/shaders/terrain.fs"))
 		));
 }
 

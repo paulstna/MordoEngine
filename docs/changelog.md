@@ -45,3 +45,10 @@
 - Rendered NxN cube grids via instanced rendering with Perlin noise
 - Improved Texture class to auto-detect nrChannels count
 - Updated fragment shader to tint top grass using color map
+
+## 2026-02-02
+- Removed CubeRenderer and Cube
+- Removed atlas and color map textures
+- Added GameScene class to manage terrain rendering and camera input controls
+- Added uint16_t heightmap loading from RAW files
+- Implemented heightmap-based terrain renderer (basic terrain rendering)
