@@ -1,9 +1,21 @@
 #include "TriangleRenderer.h"
+#include "../Core/Managers/Manager.h"
+#include "../Core/Texture/Texture.h"
 #include <cassert>
 
 TriangleRenderer::TriangleRenderer(const terrain::Terrain& terrain)
 {
+	SetTextureScale(50.0f);
+	SetHeightThresholds(0.3f, 0.7f);
 	CreateTriangleList(terrain);
+	m_Texture1ID = "grass";
+	m_Texture2ID = "dirt";
+	m_Texture3ID = "rock";
+}
+
+void TriangleRenderer::SetTextureScale(float scale)
+{
+	m_TextureScale = scale;
 }
 
 void TriangleRenderer::CreateTriangleList(const terrain::Terrain& terrain)
@@ -18,6 +30,10 @@ void TriangleRenderer::CreateTriangleList(const terrain::Terrain& terrain)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
+void TriangleRenderer::SetHeightThresholds(float threshold1, float threshold2) {
+	m_HeightThreshold1 = threshold1;
+	m_HeightThreshold2 = threshold2;
+}
 
 void TriangleRenderer::CreateGLState()
 {
@@ -30,7 +46,16 @@ void TriangleRenderer::CreateGLState()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Ebo);
 
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(terrain::Vertex), (const void*)(sizeof(float) * 0));
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(terrain::Vertex),
+		(const void*)offsetof(terrain::Vertex, pos));
+
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(terrain::Vertex),
+		(const void*)offsetof(terrain::Vertex, texCoord));
+
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(terrain::Vertex),
+		(const void*)offsetof(terrain::Vertex, height));
 }
 
 void TriangleRenderer::PopulateBuffers(const terrain::Terrain& terrain)
@@ -46,8 +71,10 @@ void TriangleRenderer::PopulateBuffers(const terrain::Terrain& terrain)
 	InitVertices(terrain, vertices);
 	InitIndices(indices);
 
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[0]) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices[0]) * indices.size(), &indices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[0]) * vertices.size(),
+		&vertices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices[0]) * indices.size(),
+		&indices[0], GL_STATIC_DRAW);
 }
 
 void TriangleRenderer::InitVertices(const terrain::Terrain& terrain, std::vector<terrain::Vertex>& vertices)
@@ -88,8 +115,24 @@ void TriangleRenderer::InitIndices(std::vector<unsigned int>& indices)
 	}
 }
 
-void TriangleRenderer::Render()
+void TriangleRenderer::Render(const Shader& shader)
 {
+	shader.SetInt("texture1", 0);
+	glActiveTexture(GL_TEXTURE0);
+	Manager<Texture>::Get(m_Texture1ID).Use();
+
+	shader.SetInt("texture2", 1);
+	glActiveTexture(GL_TEXTURE1);
+	Manager<Texture>::Get(m_Texture2ID).Use();
+
+	shader.SetInt("texture3", 2);
+	glActiveTexture(GL_TEXTURE2);
+	Manager<Texture>::Get(m_Texture3ID).Use();
+
+	shader.SetFloat("textureScale", m_TextureScale);
+	shader.SetFloat("heightThreshold1", m_HeightThreshold1);
+	shader.SetFloat("heightThreshold2", m_HeightThreshold2);
+
 	glBindVertexArray(m_Vao);
 	glDrawElements(GL_TRIANGLES, (m_Width - 1) * (m_Depth - 1) * 6, GL_UNSIGNED_INT, NULL);
 	glBindVertexArray(0);

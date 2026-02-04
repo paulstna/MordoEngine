@@ -52,3 +52,9 @@
 - Added GameScene class to manage terrain rendering and camera input controls
 - Added uint16_t heightmap loading from RAW files
 - Implemented heightmap-based terrain renderer (basic terrain rendering)
+
+## 2026-02-03
+- Implemented basic height-based texture splatting
+- Added 3 terrain textures: grass, rock, dirt 
+- Updated TriangleRenderer to manage terrain textures
+- Updated fragment shader to blend terrain textures based on height

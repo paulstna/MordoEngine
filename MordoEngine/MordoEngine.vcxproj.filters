@@ -107,4 +107,18 @@
     <None Include="res\shaders\terrain.fs" />
     <None Include="res\maps\heightmap.raw" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\textures\dirt_mid.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="res\textures\grass_low.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="res\textures\rock_high.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="res\textures\dirt_mid.jpg">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

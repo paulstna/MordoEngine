@@ -171,6 +171,12 @@
     <None Include="res\shaders\terrain.fs" />
     <None Include="res\shaders\terrain.vs" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\textures\dirt_mid.jpg" />
+    <Image Include="res\textures\dirt_mid.png" />
+    <Image Include="res\textures\grass_low.png" />
+    <Image Include="res\textures\rock_high.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

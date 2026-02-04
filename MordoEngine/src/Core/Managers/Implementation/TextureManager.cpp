@@ -4,8 +4,9 @@
 
 template<>
 void Manager<Texture>::Init() {
-	resources.emplace("atlas", Texture(FileSystem::getPath("res/textures/atlas.png")));
-	resources.emplace("colormap", Texture(FileSystem::getPath("res/textures/colormap.png")));
+	resources.emplace("grass", Texture(FileSystem::getPath("res/textures/grass_low.png")));
+	resources.emplace("dirt", Texture(FileSystem::getPath("res/textures/dirt_mid.jpg")));
+	resources.emplace("rock", Texture(FileSystem::getPath("res/textures/rock_high.png")));
 }
 
 template class Manager<Texture>;

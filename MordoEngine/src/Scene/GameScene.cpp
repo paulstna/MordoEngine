@@ -50,8 +50,7 @@ void GameScene::Render()
 	glm::mat4 view = m_Camera.GetViewMatrix();
 	shader.SetMat4("projection", projection);
 	shader.SetMat4("view", view);
-	shader.SetFloat("heightScale", m_Terrain->GetHeightScale());
-	m_Render->Render();
+	m_Render->Render(shader);
 }
 
 GameScene::~GameScene() 

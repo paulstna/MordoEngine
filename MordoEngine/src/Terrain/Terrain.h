@@ -1,5 +1,6 @@
 #pragma once
 #include <glm/vec3.hpp>
+#include <glm/vec2.hpp>
 #include <string>
 #include <vector>
 #include <cstdint>
@@ -32,6 +33,7 @@ namespace terrain
 		void SetHeightScale(float scale) noexcept;
 
 		void SetScaledHeightAt(std::uint16_t height, std::size_t x, std::size_t z);
+		float GetNormalizedHeightAt(std::size_t x, std::size_t z) const;
 		float GetScaledHeightAt(std::size_t x, std::size_t z) const;
 		std::size_t GetSize() const noexcept;
 		virtual ~Terrain() = default;
@@ -43,6 +45,8 @@ namespace terrain
 	struct Vertex
 	{
 		glm::vec3 pos;
+		glm::vec2 texCoord;
+		float height;
 		void InitVertex(const Terrain& terrain, std::size_t x, std::size_t z);
 	};
 }

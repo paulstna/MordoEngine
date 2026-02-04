@@ -8,10 +8,18 @@ using namespace terrain;
 void Vertex::InitVertex(const Terrain& terrain, std::size_t x, std::size_t z)
 {
 	pos = glm::vec3{
-		static_cast<float>(x) ,
+		static_cast<float>(x),
 		terrain.GetScaledHeightAt(x, z),
 		static_cast<float>(z)
 	};
+
+	std::size_t terrainSize = terrain.GetSize();
+	texCoord = glm::vec2{
+		static_cast<float>(x) / static_cast<float>(terrainSize - 1),
+		static_cast<float>(z) / static_cast<float>(terrainSize - 1)
+	};
+
+	height = terrain.GetNormalizedHeightAt(x,z);
 }
 
 bool Terrain::LoadHeightMap(const std::string& filename)
@@ -83,12 +91,15 @@ void Terrain::SetScaledHeightAt(std::uint16_t height, std::size_t x, std::size_t
 	p_HeightData.data[index(x, z)] = height;
 }
 
-float Terrain::GetScaledHeightAt(std::size_t x, std::size_t z) const
-{
+float Terrain::GetNormalizedHeightAt(std::size_t x, std::size_t z) const {
 	assert(x < p_HeightData.size && z < p_HeightData.size);
 	std::uint16_t h = p_HeightData.data[index(x, z)];
-	float height01 = static_cast<float>(h) / 65535.0f;
-	return height01 * p_HeightScale;
+	return static_cast<float>(h) / 65535.0f;
+}
+
+float Terrain::GetScaledHeightAt(std::size_t x, std::size_t z) const
+{
+	return GetNormalizedHeightAt(x, z) * p_HeightScale;
 }
 
 std::size_t Terrain::GetSize() const noexcept
