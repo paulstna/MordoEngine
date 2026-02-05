@@ -103,7 +103,7 @@ const glm::mat4& Camera::GetInverseViewMatrix() const {
 glm::mat4 Camera::GetProjectionMatrix() const {
     return glm::perspective(glm::radians(m_zoom),
         static_cast<float>(WINDOW_WIDTH) / static_cast<float>(WINDOW_HEIGHT),
-        0.1f, 350.0f);
+        0.1f, 256.0f*2);
 }
 
 const glm::vec3& Camera::GetPosition() const {

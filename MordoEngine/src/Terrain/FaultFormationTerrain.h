@@ -1,0 +1,17 @@
+#pragma once
+#include "Terrain.h"
+
+class FaultFormationTerrain : public terrain::Terrain
+{
+public:
+	FaultFormationTerrain(std::size_t terrainSize, int iterations,
+		uint16_t minHeight, uint16_t maxHeight, float filter);
+
+private:
+	float m_Filter;
+
+	void CreateFaultFormation(int iterations);
+	void GetRandomPoints(glm::vec2& p1, glm::vec2& p2);
+	void SmoothTerrainWithFIRFilter();
+	float ApplyFIRFilterToPoint(int x, int z, float PrevVal);
+};

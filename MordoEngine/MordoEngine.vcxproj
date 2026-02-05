@@ -146,6 +146,7 @@
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Renderer\TriangleRenderer.cpp" />
     <ClCompile Include="src\Scene\GameScene.cpp" />
+    <ClCompile Include="src\Terrain\FaultFormationTerrain.cpp" />
     <ClCompile Include="src\Terrain\HeightMapTerrain.cpp" />
     <ClCompile Include="src\Terrain\Terrain.cpp" />
     <ClCompile Include="vendor\glad\src\glad.c" />
@@ -163,6 +164,7 @@
     <ClInclude Include="src\Renderer\TriangleRenderer.h" />
     <ClInclude Include="src\Scene\GameScene.h" />
     <ClInclude Include="src\Scene\Scene.h" />
+    <ClInclude Include="src\Terrain\FaultFormationTerrain.h" />
     <ClInclude Include="src\Terrain\HeightmapTerrain.h" />
     <ClInclude Include="src\Terrain\Terrain.h" />
   </ItemGroup>

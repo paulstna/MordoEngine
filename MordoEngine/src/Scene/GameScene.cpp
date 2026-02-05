@@ -1,5 +1,6 @@
 #include "GameScene.h"
 #include "../Terrain/HeightmapTerrain.h"
+#include "../Terrain/FaultFormationTerrain.h"
 #include "../API/OpenGL/OpenGLBackend.h"
 #include "../Renderer/TriangleRenderer.h"
 #include "../Core/Managers/Manager.h"
@@ -7,13 +8,14 @@
 #include "../Input/Input.h"
 
 GameScene::GameScene() : Scene("terrain"),
-						m_Terrain(std::make_unique<HeightMapTerrain>("res/maps/heightmap.raw")),
+						//m_Terrain(std::make_unique<HeightMapTerrain>("res/maps/heightmap.raw")),
+						m_Terrain(std::make_unique<FaultFormationTerrain>(256*2, 50, 0, 45535.0f, 0.26f)),
 						m_Camera(Camera(glm::vec3{ 0.0f, 50.0f, .0f },
-								OpenGLBackend::SCR_WIDTH,
-								OpenGLBackend::SCR_HEIGHT)
+							OpenGLBackend::SCR_WIDTH,
+							OpenGLBackend::SCR_HEIGHT)
 )
 {
-	m_Terrain->SetHeightScale(120.0f);
+	m_Terrain->SetHeightScale(160.0f);
 	m_Render = std::make_unique<TriangleRenderer>(*m_Terrain);
 	Input::DisableCursor();
 }
@@ -21,7 +23,7 @@ GameScene::GameScene() : Scene("terrain"),
 void GameScene::Update(float deltaTime)
 {
 	glm::vec3 newCameraPosition = m_Camera.GetPosition();
-	float velocity = 25.0f * deltaTime;
+	float velocity = 100.0f * deltaTime;
 
 	if (Input::KeyDown(GLFW_KEY_W)) {
 		newCameraPosition += m_Camera.GetForward() * velocity;
@@ -53,7 +55,7 @@ void GameScene::Render()
 	m_Render->Render(shader);
 }
 
-GameScene::~GameScene() 
+GameScene::~GameScene()
 {
 	m_Terrain->UnloadHeightMap();
 }

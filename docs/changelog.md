@@ -58,3 +58,8 @@
 - Added 3 terrain textures: grass, rock, dirt 
 - Updated TriangleRenderer to manage terrain textures
 - Updated fragment shader to blend terrain textures based on height
+
+## 2026-02-04
+- Implemented Fault Formation terrain generation and rendering
+- Refactored GameScene to use the FaultFormation class for terrain generation and rendering
+- Refactored Terrain to support multiple terrain generation techniques
