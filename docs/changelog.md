@@ -66,3 +66,8 @@
 
 ## 2026-02-05
 - Implemented midpoint displacement terrain generation and rendering
+
+## 2026-02-07
+- Implemented terrain normal calculation for lighting
+- Updated shaders to apply basic directional lighting using computed normals
+- Added a basic sun light that moves across the sky based on time of day, affecting terrain lighting

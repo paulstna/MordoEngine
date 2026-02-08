@@ -29,4 +29,5 @@ private:
 	void PopulateBuffers(const terrain::Terrain& terrain);
 	void InitVertices(const terrain::Terrain& terrain, std::vector<terrain::Vertex>& vertices);
 	void InitIndices(std::vector<unsigned int>& indices);
+	void CalculateSmoothNormals(std::vector<terrain::Vertex>& vertices, std::vector<unsigned int>& indices);
 };

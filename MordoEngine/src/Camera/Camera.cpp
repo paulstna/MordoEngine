@@ -4,7 +4,6 @@
 Camera::Camera(glm::vec3 position, unsigned int windowWidth, unsigned int windowHeight)
     : m_position(position), WINDOW_WIDTH(windowWidth), WINDOW_HEIGHT(windowHeight)
 {
-    LookAt(glm::vec3{ 5.0f, 50.0f, 5.0f });
 }
 
 void Camera::Update() {
@@ -75,6 +74,10 @@ void Camera::SetMaxPitch(float value) {
 void Camera::SetWindowSize(unsigned int width, unsigned int height) {
     WINDOW_WIDTH = width;
     WINDOW_HEIGHT = height;
+}
+
+void Camera::SetLookAt(glm::vec3 lookAt) {
+    LookAt(lookAt);
 }
 
 void Camera::ProcessMouseMovement(float xoffset, float yoffset) {

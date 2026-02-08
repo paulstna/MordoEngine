@@ -22,9 +22,8 @@ The codebase evolves over time as I learn new concepts, improve the architecture
 - perlin noise
 
 ## Project Status
-Midpoint Displacement Terrain Renderer: (GL_LINE / GL_FILL).
-![Triangle Renderer](imgs/2026-02-06-1.png)
-![Triangle Renderer](imgs/2026-02-06-2.png)
+Terrain Renderer with normals light vectors:
+![Triangle Renderer](imgs/2026-02-07.png)
 
 ## Notes
 This is an educational and personal project focused on learning and experimentation.  

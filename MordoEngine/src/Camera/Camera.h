@@ -13,6 +13,7 @@ public:
 	void SetMinPitch(float value);
 	void SetMaxPitch(float value);
 	void SetWindowSize(unsigned int width, unsigned int height);
+	void SetLookAt(glm::vec3 lookAt);
 	void AddPitch(float value);
 	void AddYaw(float value);
 	void AddHeight(float value);

@@ -54,7 +54,11 @@ void TriangleRenderer::CreateGLState()
 		(const void*)offsetof(terrain::Vertex, texCoord));
 
 	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(terrain::Vertex),
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(terrain::Vertex),
+		(const void*)offsetof(terrain::Vertex, normal));
+
+	glEnableVertexAttribArray(3);
+	glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(terrain::Vertex),
 		(const void*)offsetof(terrain::Vertex, height));
 }
 
@@ -70,6 +74,8 @@ void TriangleRenderer::PopulateBuffers(const terrain::Terrain& terrain)
 	glBindBuffer(GL_ARRAY_BUFFER, m_Vbo);
 	InitVertices(terrain, vertices);
 	InitIndices(indices);
+
+	CalculateSmoothNormals(vertices, indices);
 
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[0]) * vertices.size(),
 		&vertices[0], GL_STATIC_DRAW);
@@ -136,6 +142,25 @@ void TriangleRenderer::Render(const Shader& shader)
 	glBindVertexArray(m_Vao);
 	glDrawElements(GL_TRIANGLES, (m_Width - 1) * (m_Depth - 1) * 6, GL_UNSIGNED_INT, NULL);
 	glBindVertexArray(0);
+}
+
+void TriangleRenderer::CalculateSmoothNormals(std::vector<terrain::Vertex>& vertices, std::vector<unsigned int>& indices) {
+	for (unsigned int i = 0; i < indices.size(); i += 3) {
+		unsigned int index0 = indices[i];
+		unsigned int index1 = indices[i+1];
+		unsigned int index2 = indices[i+2];
+		glm::vec3 v1 = vertices[index1].pos - vertices[index0].pos;
+		glm::vec3 v2 = vertices[index2].pos - vertices[index0].pos;
+		glm::vec3 triangleNormal = glm::normalize(glm::cross(v1, v2));
+
+		vertices[index0].normal += triangleNormal;
+		vertices[index1].normal += triangleNormal;
+		vertices[index2].normal += triangleNormal;
+	}
+
+	for (auto& vertex : vertices) {
+		vertex.normal = glm::normalize(vertex.normal);
+	}
 }
 
 TriangleRenderer::~TriangleRenderer()
