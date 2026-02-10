@@ -38,11 +38,13 @@ namespace terrain
 		float GetScaledHeightAt(std::size_t x, std::size_t z) const;
 
 		std::size_t GetSize() const noexcept;
+		int GetWorldScale() const noexcept;
 
 		virtual ~Terrain() = default;
 
 	protected:
 		HeightData p_HeightData;
+		int p_WorldScale = 1.0f;
 		float p_HeightScale = 1.0f;
 		float p_MinHeight = 0.0f;
 		float p_MaxHeight = RAW_HEIGHT_MAX;
@@ -50,7 +52,7 @@ namespace terrain
 		unsigned int p_Depth = 0;
 		bool p_IsScaled = false;
 
-		void Initialize(std::size_t size, float minH, float maxH);
+		void Initialize(std::size_t size, int worldScale, float minH, float maxH);
 		void RescaleData(float min, float max);
 
 	private:

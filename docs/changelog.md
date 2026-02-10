@@ -74,3 +74,7 @@
 
 ## 2026-02-08
 - Implemented geomipmapping for terrain level-of-detail (LOD) rendering 
+
+## 2026-02-10
+- Implemented GeoMipMapping with dynamic camera distance-based LOD selection
+- Added world size parameter to control terrain scale and LOD levels

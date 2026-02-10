@@ -121,7 +121,7 @@ void TriangleRenderer::InitIndices(std::vector<unsigned int>& indices)
 	}
 }
 
-void TriangleRenderer::Render(const Shader& shader)
+void TriangleRenderer::Render(const Shader& shader , const glm::vec3& cameraPos)
 {
 	shader.SetInt("texture1", 0);
 	glActiveTexture(GL_TEXTURE0);

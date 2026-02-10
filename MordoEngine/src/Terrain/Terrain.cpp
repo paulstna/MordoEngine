@@ -8,7 +8,7 @@
 
 using namespace terrain;
 
-void Terrain::Initialize(std::size_t size, float minH, float maxH)
+void Terrain::Initialize(std::size_t size, int worldScale, float minH, float maxH)
 {
 	p_HeightData.size = size;
 	p_HeightData.data.resize(size * size, 0.0f);
@@ -16,15 +16,16 @@ void Terrain::Initialize(std::size_t size, float minH, float maxH)
 	p_Depth = size;
 	p_MinHeight = static_cast<float>(minH);
 	p_MaxHeight = static_cast<float>(maxH);
+	p_WorldScale = worldScale;
 	p_IsScaled = false;
 }
 
 void Vertex::InitVertex(const Terrain& terrain, std::size_t x, std::size_t z)
 {
 	pos = glm::vec3{
-		static_cast<float>(x),
+		static_cast<float>(x) * terrain.GetWorldScale(),
 		terrain.GetScaledHeightAt(x, z),
-		static_cast<float>(z)
+		static_cast<float>(z) * terrain.GetWorldScale(),
 	};
 
 	std::size_t terrainSize = terrain.GetSize();
@@ -60,7 +61,7 @@ bool Terrain::LoadHeightMap(const std::string& filename)
 	if (!file.good())
 		return false;
 
-	Initialize(size, 0.0f, RAW_HEIGHT_MAX);
+	Initialize(size, 1.0f, 0.0f, RAW_HEIGHT_MAX);
 	for (std::size_t i = 0; i < totalElements; i++){
 		p_HeightData.data[i] = static_cast<float>(tempData[i]);
 	}
@@ -146,6 +147,12 @@ std::size_t Terrain::GetSize() const noexcept
 {
 	return p_HeightData.size;
 }
+
+int Terrain::GetWorldScale() const noexcept
+{
+	return p_WorldScale;
+}
+
 
 void Terrain::RescaleData(float minRange, float maxRange)
 {

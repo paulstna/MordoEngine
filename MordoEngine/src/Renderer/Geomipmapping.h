@@ -1,5 +1,7 @@
 #pragma once
 #include "Renderer.h"
+#include <vector>
+#include "LodManager.h"
 #include "../Terrain/Terrain.h"
 
 class Geomipmapping : public Renderer
@@ -8,12 +10,26 @@ public:
 	Geomipmapping(const terrain::Terrain& terrain, int patchSize);
 	void SetTextureScale(float scale);
 	void SetHeightThresholds(float threshold1, float threshold2);
-	void Render(const Shader& shader) override;
+	void Render(const Shader& shader, const glm::vec3& cameraPos) override;
 	~Geomipmapping();
 private:
 	int m_Width;
 	int m_Depth;
 	int m_PatchSize;
+	struct SingleLodInfo {
+		int start = 0;
+		int count = 0;
+	};
+
+	struct LodInfo {
+		SingleLodInfo info[2][2][2][2];
+	};
+
+	std::vector<LodInfo> m_LodInfo;
+	int m_NumPatchesX;
+	int m_NumPatchesZ;
+	int m_MaxLOD;
+	LodManager m_LodManager;
 	GLuint m_Vao;
 	GLuint m_Vbo;
 	GLuint m_Ebo;
@@ -27,7 +43,15 @@ private:
 	void CreateGLState();
 	void PopulateBuffers(const terrain::Terrain& terrain);
 	void InitVertices(const terrain::Terrain& terrain, std::vector<terrain::Vertex>& vertices);
-	void InitIndices(std::vector<unsigned int>& indices);
+	int InitIndices(std::vector<unsigned int>& indices);
 	void CalculateSmoothNormals(std::vector<terrain::Vertex>& vertices, std::vector<unsigned int>& indices);
-	unsigned int AddTriangle(unsigned index, std::vector<unsigned>& indices, unsigned v1, unsigned v2, unsigned v3);
+	unsigned int AddTriangle(unsigned int index, std::vector<unsigned int>& indices,
+		unsigned int vertex1, unsigned int vertex2, unsigned int vertex3);
+	int CalcNumIndices();
+	int InitIndicesLOD(int index, std::vector<unsigned int>& indices, int lod);
+	int InitIndicesLODSingle(int index, std::vector<unsigned int>& indices,
+		int lodCore, int lodLeft, int lodRight, int lodTop, int lodBottom);
+	unsigned int CreateTriangleFan(int index, std::vector<unsigned int>& indices, 
+		int lodCore, int lodLeft, int lodRight, int lodTop, int lodBottom, int x, int z);
+	int Powi(int base, int exp);
 };

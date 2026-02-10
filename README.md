@@ -22,9 +22,9 @@ The codebase evolves over time as I learn new concepts, improve the architecture
 - perlin noise
 
 ## Project Status
-Terrain Renderer with GeoMipMapping LOD (in development) – GL_LINE / GL_FILL
-![Triangle Renderer](imgs/2026-02-08-1.png)
-![Triangle Renderer](imgs/2026-02-08-2.png)
+Terrain Renderer using GeoMipMapping with camera distance-based LOD selection (GL_LINE / GL_FILL)
+![Triangle Renderer](imgs/2026-02-10-1.png)
+![Triangle Renderer](imgs/2026-02-10-2.png)
 
 ## Notes
 This is an educational and personal project focused on learning and experimentation.  

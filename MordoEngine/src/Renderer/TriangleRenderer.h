@@ -10,7 +10,7 @@ public:
 	TriangleRenderer(const terrain::Terrain& terrain);
 	void SetTextureScale(float scale);
 	void SetHeightThresholds(float threshold1, float threshold2);
-	void Render(const Shader& shader) override;
+	void Render(const Shader& shader, const glm::vec3& cameraPos) override;
 	~TriangleRenderer();
 private:
 	int m_Width;

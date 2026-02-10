@@ -11,15 +11,15 @@
 
 GameScene::GameScene() : Scene("terrain"),
 						//m_Terrain(std::make_unique<HeightMapTerrain>("res/maps/heightmap.raw")),
-						//m_Terrain(std::make_unique<FaultFormationTerrain>(256*2, 50, 0, 45535.0f, 0.26f)),
-						m_Terrain(std::make_unique<MidpointDisplacement>(513, 0.9f, 0, terrain::RAW_HEIGHT_MAX)),
+						//m_Terrain(std::make_unique<FaultFormationTerrain>(513, 3.0f, 50, 0, terrain::RAW_HEIGHT_MAX, 0.15f)),
+						m_Terrain(std::make_unique<MidpointDisplacement>(1057, 2.0f, 1.0f, 0, terrain::RAW_HEIGHT_MAX)),
 						m_Sun(std::make_unique<Sun>(0.9f)),
-						m_Camera(Camera(glm::vec3{ 0.0f, 50.0f, 1.20f },
+						m_Camera(Camera(glm::vec3{ 0.0f, 50.0f, .80f },
 							OpenGLBackend::SCR_WIDTH,
 							OpenGLBackend::SCR_HEIGHT)
 )
 {
-	m_Terrain->SetHeightScale(160.0f);
+	m_Terrain->SetHeightScale(460.0f * m_Terrain->GetWorldScale());
 	m_Camera.SetPosition(glm::vec3(m_Terrain->GetSize()/2, 
 								   m_Terrain->GetHeightScale(), 
 		                           m_Terrain->GetSize() / 2));
@@ -33,7 +33,7 @@ void GameScene::Update(float deltaTime)
 {
 	m_Sun->Update(deltaTime);
 	glm::vec3 newCameraPosition = m_Camera.GetPosition();
-	float velocity = 100.0f * deltaTime;
+	float velocity = 100.0f * m_Terrain->GetWorldScale() * deltaTime;
 
 	if (Input::KeyDown(GLFW_KEY_W)) {
 		newCameraPosition += m_Camera.GetForward() * velocity;
@@ -66,7 +66,7 @@ void GameScene::Render()
 	shader.SetMat4("view", view);
 
 	shader.SetVec3("reverseLightDir", m_Sun->GetReverseLightDirection());
-	m_Render->Render(shader);
+	m_Render->Render(shader, m_Camera.GetPosition());
 }
 
 GameScene::~GameScene()

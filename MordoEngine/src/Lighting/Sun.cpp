@@ -15,14 +15,15 @@ void Sun::Update(float deltaTime)
 }
 glm::vec3 Sun::GetReverseLightDirection()
 {
-	float x = 0.0f;
-	float y = sin(m_TimeOfDay);  
-	float z = cos(m_TimeOfDay);  
-
-	return glm::normalize(glm::vec3(x, y, z));
+	return -GetLightDirection();
 }
 
 glm::vec3 Sun::GetLightDirection()
 {
-	return -GetLightDirection();
+	float x = 0.0f;
+	float y = sin(m_TimeOfDay);
+	float z = cos(m_TimeOfDay);
+
+	return glm::normalize(glm::vec3(0, -1, 0));
+	//return glm::normalize(glm::vec3(x, y, z));
 }

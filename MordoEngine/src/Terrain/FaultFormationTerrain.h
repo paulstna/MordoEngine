@@ -4,7 +4,7 @@
 class FaultFormationTerrain : public terrain::Terrain
 {
 public:
-	FaultFormationTerrain(std::size_t terrainSize, int iterations,
+	FaultFormationTerrain(std::size_t terrainSize, int worldScale,  int iterations,
 		uint16_t minHeight, uint16_t maxHeight, float filter);
 
 private:
