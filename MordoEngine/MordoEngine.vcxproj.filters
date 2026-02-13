@@ -51,7 +51,7 @@
     <ClCompile Include="src\Renderer\TriangleRenderer.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="src\Scene\GameScene.cpp">
+    <ClCompile Include="src\Scene\Game\GameScene.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="src\Terrain\HeightMapTerrain.cpp">
@@ -76,6 +76,9 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="src\Renderer\AreaSelectorRenderer.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\SceneManager.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -116,7 +119,7 @@
     <ClInclude Include="src\Scene\Scene.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="src\Scene\GameScene.h">
+    <ClInclude Include="src\Scene\Game\GameScene.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="src\Terrain\HeightmapTerrain.h">
@@ -141,6 +144,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="src\Renderer\AreaSelectorRenderer.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\SceneManager.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,16 +1,16 @@
 #pragma once
-#include "Scene.h"
-#include "../Camera/Camera.h"
-#include "../Terrain/Terrain.h"
-#include "../Renderer/Renderer.h"
-#include "../Renderer/Geomipmapping.h"
-#include "../Lighting/Sun.h"
+#include "../Scene.h"
+#include "../../Camera/Camera.h"
+#include "../../Terrain/Terrain.h"
+#include "../../Renderer/Renderer.h"
+#include "../../Renderer/Geomipmapping.h"
+#include "../../Lighting/Sun.h"
 #include <memory>
 
 class GameScene : public Scene
 {
 private:
-	
+
 
 public:
 	GameScene();

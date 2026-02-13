@@ -5,7 +5,7 @@ class Scene
 {
 protected:
 	std::string p_ShaderID;
-	Scene(const std::string& shaderID) 
+	Scene(const std::string& shaderID)
 	{
 		p_ShaderID = shaderID;
 	}

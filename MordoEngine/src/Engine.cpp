@@ -1,12 +1,10 @@
 #include "Engine.h"
 #include "API/OpenGL/OpenGLBackend.h"
 #include "Input/Input.h"
-#include "Scene/Scene.h"
-#include "Scene/GameScene.h"
 #include "Core/Managers/Manager.h"
 #include "Core/Texture/Texture.h"
 #include "Core/Shader/Shader.h"
-#include "Scene/Editor/EditorScene.h"
+#include "Scene/SceneManager.h"
 #include <memory>
 
 void Engine::Run()
@@ -15,17 +13,9 @@ void Engine::Run()
 	Input::Init(OpenGLBackend::GetGLFWwindow());
 	Manager<Texture>::Init();
 	Manager<Shader>::Init();
-	std::unique_ptr<GameScene> gameScene = std::make_unique<GameScene>();
-
-	std::unique_ptr<Scene> editorScene = std::make_unique<EditorScene>
-		(
-			gameScene->m_Terrain,
-			gameScene->m_Render,
-			gameScene->m_Camera
-		);
+	std::unique_ptr<SceneManager> sceneManager = std::make_unique<SceneManager>();
 
 	float lastTime = 0.0f;
-	bool isEditorOpen = false;
 	while (!OpenGLBackend::WindowShouldClose())
 	{
 		static bool drawModeInLines = false;
@@ -42,31 +32,19 @@ void Engine::Run()
 
 		if (Input::KeyPressed(GLFW_KEY_SPACE)) {
 			drawModeInLines = !drawModeInLines;
-			if (drawModeInLines) {
-				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-			}
-			else {
-				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-			}
 		}
 
-		if (Input::KeyPressed(GLFW_KEY_E))
-		{
-			isEditorOpen = !isEditorOpen;
-		}
-
-		if (isEditorOpen) {
-			editorScene->Update(deltaTime);
-			editorScene->Render();
+		if (drawModeInLines) {
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
 		else {
-			gameScene->Update(deltaTime);
-			gameScene->Render();
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}
 
+		sceneManager->Update(deltaTime);
+		sceneManager->Render();
 		OpenGLBackend::SwapBuffers();
 	}
-
 
 	Manager<Texture>::Clear();
 	Manager<Shader>::Clear();

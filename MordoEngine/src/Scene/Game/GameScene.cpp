@@ -1,13 +1,13 @@
 #include "GameScene.h"
-#include "../Terrain/HeightmapTerrain.h"
-#include "../Terrain/FaultFormationTerrain.h"
-#include "../Terrain/MidpointDisplacement.h"
-#include "../API/OpenGL/OpenGLBackend.h"
-#include "../Renderer/TriangleRenderer.h"
-#include "../Renderer/Geomipmapping.h"
-#include "../Core/Managers/Manager.h"
-#include "../Core/Shader/Shader.h"
-#include "../Input/Input.h"
+#include "../../Terrain/HeightmapTerrain.h"
+#include "../../Terrain/FaultFormationTerrain.h"
+#include "../../Terrain/MidpointDisplacement.h"
+#include "../../API/OpenGL/OpenGLBackend.h"
+#include "../../Renderer/TriangleRenderer.h"
+#include "../../Renderer/Geomipmapping.h"
+#include "../../Core/Managers/Manager.h"
+#include "../../Core/Shader/Shader.h"
+#include "../../Input/Input.h"
 
 GameScene::GameScene() : Scene("terrain"),
 						//m_Terrain(std::make_shared<HeightMapTerrain>("res/maps/heightmap.raw")),

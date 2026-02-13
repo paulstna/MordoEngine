@@ -84,3 +84,4 @@
 - Implemented a basic terrain picking system using ray casting to select terrain points with the mouse
 - Added visual feedback for selected terrain area points (yellow circle)
 - Added terrain selector fragment and vertex shaders for rendering the selection indicator on the terrain
+- Added a SceneManager to manage switching between the main game scene and the terrain editor scene
