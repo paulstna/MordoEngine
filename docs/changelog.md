@@ -85,3 +85,7 @@
 - Added visual feedback for selected terrain area points (yellow circle)
 - Added terrain selector fragment and vertex shaders for rendering the selection indicator on the terrain
 - Added a SceneManager to manage switching between the main game scene and the terrain editor scene
+
+## 2026-02-13
+- Refactored SceneManager to handlde the shared terrain data between the GameScene and TerrainEditorScene
+- Refactored GameScene and EditorScene to use the shared terrain data from the SceneManager

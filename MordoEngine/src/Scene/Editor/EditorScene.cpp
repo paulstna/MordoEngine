@@ -3,16 +3,11 @@
 #include "../../Core/Shader/Shader.h"
 #include "../../Input/Input.h"
 
-EditorScene::EditorScene(std::shared_ptr<terrain::Terrain> terrain, std::shared_ptr<Geomipmapping> renderer, std::shared_ptr<Camera> camera)
-	: Scene("terrain"), m_Camera(camera), m_Renderer(renderer), m_Terrain(terrain), 
+EditorScene::EditorScene(std::shared_ptr<terrain::Terrain> terrain, std::shared_ptr<Camera> camera, std::shared_ptr<Renderer> renderer)
+	: Scene("terrain"), m_Terrain(terrain), m_Camera(camera), m_Renderer(renderer),
 	  m_TerrainSelector(std::make_unique<AreaSelectorRenderer>(camera))
 {
-	
-}
 
-EditorScene::~EditorScene()
-{
-	//
 }
 
 
@@ -57,4 +52,9 @@ void EditorScene::Update(float deltaTime)
 	m_Camera->ProcessMouseMovement(Input::MouseDeltaX(), Input::MouseDeltaY());
 
 	m_TerrainSelector->Update(*m_Terrain);
+}
+
+EditorScene::~EditorScene()
+{
+	//
 }

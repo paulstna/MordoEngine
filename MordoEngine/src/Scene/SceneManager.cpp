@@ -1,21 +1,32 @@
 #include "SceneManager.h"
+#include "../API/OpenGL/OpenGLBackend.h"
 #include "Editor/EditorScene.h"
+#include "../Terrain/FaultFormationTerrain.h"
 #include "Game/GameScene.h"
+#include "../Renderer/Geomipmapping.h"
 #include "../Input/Input.h"
 #include <iostream>
 
 SceneManager::SceneManager() : m_ActiveScene(nullptr), m_ActiveSceneName("")
 {
-	std::unique_ptr<GameScene> gameScene = std::make_unique<GameScene>();
-	std::unique_ptr<EditorScene> editorScene = std::make_unique<EditorScene>
-		(
-			gameScene->m_Terrain,
-			gameScene->m_Render,
-			gameScene->m_Camera
-		);
+	Input::DisableCursor();
+	// m_ShaderTerrain = std::make_shared<HeightMapTerrain>("res/maps/heightmap.raw");
+	// m_ShaderTerrain = std::make_unique<MidpointDisplacement>(1057, 3.0f, 1.0f, 0, terrain::RAW_HEIGHT_MAX);
+	m_SharedTerrain = std::make_shared<FaultFormationTerrain>(513, 3.0f, 50, 0, terrain::RAW_HEIGHT_MAX, 0.15f);
+	m_SharedTerrain->SetHeightScale(200.0f * m_SharedTerrain->GetWorldScale());
 
-	AddScene("game", std::move(gameScene));
-	AddScene("editor", std::move(editorScene));
+	m_SharedCamera = std::make_shared<Camera>(glm::vec3{ 0.0f, 50.0f, .80f },
+											  OpenGLBackend::SCR_WIDTH, 
+		                                      OpenGLBackend::SCR_HEIGHT );
+	m_SharedCamera->SetPosition(glm::vec3(m_SharedTerrain->GetSize() / 2,
+										  m_SharedTerrain->GetHeightScale(),
+										  m_SharedTerrain->GetSize() / 2));
+	m_SharedCamera->LookAt(glm::vec3(m_SharedTerrain->GetSize() / 2, 180.0f, m_SharedTerrain->GetSize() / 2));
+	
+	m_SharedRenderer = std::make_shared<Geomipmapping>(*m_SharedTerrain, 33.0f);
+
+	AddScene("game", std::make_unique<GameScene>(m_SharedTerrain, m_SharedCamera, m_SharedRenderer));
+	AddScene("editor", std::make_unique<EditorScene>(m_SharedTerrain, m_SharedCamera, m_SharedRenderer));
 	SetActiveScene("game");
 }
 
@@ -82,4 +93,5 @@ void SceneManager::Render()
 
 SceneManager::~SceneManager() {
 	m_Scenes.clear();
+	m_SharedTerrain->UnloadHeightMap();
 }
