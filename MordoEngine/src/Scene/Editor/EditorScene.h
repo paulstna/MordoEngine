@@ -4,6 +4,7 @@
 #include "../../Renderer/Geomipmapping.h"
 #include "../../Camera/Camera.h"
 #include "../../Renderer/AreaSelectorRenderer.h"
+#include "./Controllers/EditorCameraController.h"
 #include <memory>
 
 class EditorScene : public Scene
@@ -13,6 +14,7 @@ private:
 	std::shared_ptr<Camera> m_Camera;
 	std::shared_ptr<Renderer> m_Renderer;
 	std::unique_ptr<AreaSelectorRenderer> m_TerrainSelector;
+	std::unique_ptr<EditorCameraController> m_CameraController;
 
 public:
 	EditorScene(std::shared_ptr<terrain::Terrain> terrain, std::shared_ptr<Camera> camera, std::shared_ptr<Renderer> renderer);

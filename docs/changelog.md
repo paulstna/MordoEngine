@@ -87,5 +87,7 @@
 - Added a SceneManager to manage switching between the main game scene and the terrain editor scene
 
 ## 2026-02-13
-- Refactored SceneManager to handlde the shared terrain data between the GameScene and TerrainEditorScene
+- Refactored SceneManager to handle the shared terrain data between the GameScene and TerrainEditorScene
 - Refactored GameScene and EditorScene to use the shared terrain data from the SceneManager
+- Added editor camera controller to manage input in terrain editor scene
+- Refactored scene update methods to delegate input and camera updates to editor camera controller class

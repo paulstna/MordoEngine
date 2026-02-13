@@ -4,6 +4,7 @@
 #include "../../Terrain/Terrain.h"
 #include "../../Renderer/Renderer.h"
 #include "../../Lighting/Sun.h"
+#include "../Editor/Controllers/EditorCameraController.h"
 #include <memory>
 
 class GameScene : public Scene
@@ -12,6 +13,7 @@ private:
 	std::shared_ptr<terrain::Terrain> m_Terrain;
 	std::shared_ptr<Camera> m_Camera;
 	std::shared_ptr<Renderer> m_Renderer;
+	std::unique_ptr<EditorCameraController> m_CameraController;
 	std::unique_ptr<Sun> m_Sun;
 
 public:

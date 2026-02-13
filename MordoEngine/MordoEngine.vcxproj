@@ -149,6 +149,7 @@
     <ClCompile Include="src\Renderer\Geomipmapping.cpp" />
     <ClCompile Include="src\Renderer\LodManager .cpp" />
     <ClCompile Include="src\Renderer\TriangleRenderer.cpp" />
+    <ClCompile Include="src\Scene\Editor\Controllers\EditorCameraController.cpp" />
     <ClCompile Include="src\Scene\Editor\EditorScene.cpp" />
     <ClCompile Include="src\Scene\Game\GameScene.cpp" />
     <ClCompile Include="src\Scene\SceneManager.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="src\Renderer\LodManager.h" />
     <ClInclude Include="src\Renderer\Renderer.h" />
     <ClInclude Include="src\Renderer\TriangleRenderer.h" />
+    <ClInclude Include="src\Scene\Editor\Controllers\EditorCameraController.h" />
     <ClInclude Include="src\Scene\Editor\EditorScene.h" />
     <ClInclude Include="src\Scene\Game\GameScene.h" />
     <ClInclude Include="src\Scene\Scene.h" />
