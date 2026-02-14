@@ -91,3 +91,7 @@
 - Refactored GameScene and EditorScene to use the shared terrain data from the SceneManager
 - Added editor camera controller to manage input in terrain editor scene
 - Refactored scene update methods to delegate input and camera updates to editor camera controller class
+
+## 2026-02-14
+- Added a editor system class to manage editor-specific functionality and tools
+- Refactored Area selection logic into the EditorSystem class

@@ -11,19 +11,14 @@ private:
 	GLuint m_Vao;
 	GLuint m_PosVbo;
 	GLuint m_HeightVbo;
-	float m_Radius = 50.0f;
-	float m_Segments = 256;
-	float m_HeightOffSet = 10.0f;
 	glm::vec3 m_WorldPosition;
 	std::string m_ShaderID;
-	std::shared_ptr<Camera> m_Camera;
 	void CreateGLState();
-	void PopulateBuffers();
-	void InitVertices(std::vector<glm::vec2>& vertices);
-	glm::vec3 RaycastToTerrain(const glm::vec3& rayOrigin, const glm::vec3& rayDir, const terrain::Terrain& terrain);
+	void PopulateBuffers(float radius, int segments);
+	void InitVertices(std::vector<glm::vec2>& vertices, float radius, int segments);
 public:
-	AreaSelectorRenderer(std::shared_ptr<Camera> camera);
-	void Render();
-	void Update(terrain::Terrain& terrain);
+	AreaSelectorRenderer(float radius, int segments);
+	void Render(const Camera& camera, int segments);
+	void SetHeights(const std::vector<float>& heights, const glm::vec3& position);
 	~AreaSelectorRenderer();
 };

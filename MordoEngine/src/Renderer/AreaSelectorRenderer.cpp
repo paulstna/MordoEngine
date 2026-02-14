@@ -4,11 +4,11 @@
 #include <iostream>
 
 
-AreaSelectorRenderer::AreaSelectorRenderer(std::shared_ptr<Camera> camera) : m_Camera(camera)
+AreaSelectorRenderer::AreaSelectorRenderer(float radius, int segments)
 {
 	m_ShaderID = "terrainSelector";
 	CreateGLState();
-	PopulateBuffers();
+	PopulateBuffers(radius, segments);
 
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -33,12 +33,12 @@ void AreaSelectorRenderer::CreateGLState()
 
 }
 
-void AreaSelectorRenderer::PopulateBuffers()
+void AreaSelectorRenderer::PopulateBuffers(float radius, int segments)
 {
 	std::vector<glm::vec2> verticesXZ;
-	std::vector<float> heights(m_Segments, 0.0f);
+	std::vector<float> heights(segments, 0.0f);
 
-	InitVertices(verticesXZ);
+	InitVertices(verticesXZ, radius, segments);
 
 	glBindBuffer(GL_ARRAY_BUFFER, m_PosVbo);
 	glBufferData(
@@ -57,44 +57,23 @@ void AreaSelectorRenderer::PopulateBuffers()
 	);
 }
 
-void AreaSelectorRenderer::InitVertices(std::vector<glm::vec2>& vertices)
+void AreaSelectorRenderer::InitVertices(std::vector<glm::vec2>& vertices, float radius, int segments)
 {
 
-	for (int i = 0; i < m_Segments; ++i)
+	for (int i = 0; i < segments; ++i)
 	{
-		float angle = (float)i / m_Segments * glm::two_pi<float>();
+		float angle = (float)i / segments * glm::two_pi<float>();
 
 		vertices.push_back({
-			glm::cos(angle) * m_Radius,
-			glm::sin(angle) * m_Radius
+			glm::cos(angle) * radius,
+			glm::sin(angle) * radius
 			});
 	}
 }
 
-void AreaSelectorRenderer::Update(terrain::Terrain& terrain)
+void AreaSelectorRenderer::SetHeights(const std::vector<float>& heights, const glm::vec3& position)
 {
-	m_WorldPosition = RaycastToTerrain(
-		m_Camera->GetPosition(),
-		glm::normalize(m_Camera->GetForward()),
-		terrain);
-	float terrainSize = terrain.GetSize() * terrain.GetWorldScale();
-
-	std::vector<float> heights(m_Segments);
-	for (int i = 0; i < m_Segments; i++) {
-		float angle = (float)i / m_Segments * glm::two_pi<float>();
-		float posX = glm::cos(angle) * m_Radius + m_WorldPosition.x;
-		float posZ = glm::sin(angle) * m_Radius + m_WorldPosition.z;
-
-		if (posX < 0.0f || posX > terrainSize ||
-			posZ < 0.0f || posZ > terrainSize) {
-			
-		}
-		else {
-			heights[i] = terrain.GetHeightInterpolated(posX, posZ) + m_HeightOffSet;
-		}
-
-	}
-
+	m_WorldPosition = position;
 	glBindVertexArray(m_Vao);
 	glBindBuffer(GL_ARRAY_BUFFER, m_HeightVbo);
 	glBufferSubData(GL_ARRAY_BUFFER, 0, heights.size() * sizeof(float), heights.data());
@@ -102,43 +81,15 @@ void AreaSelectorRenderer::Update(terrain::Terrain& terrain)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-glm::vec3 AreaSelectorRenderer::RaycastToTerrain(
-	const glm::vec3& rayOrigin,
-	const glm::vec3& rayDir,
-	const terrain::Terrain& terrain)
-{
-	float terrainSize = terrain.GetSize() * terrain.GetWorldScale();
-
-	float maxDistance = terrainSize;
-	float stepSize = 0.5f;
-
-	for (float t = 0; t < maxDistance; t += stepSize){
-		glm::vec3 point = rayOrigin + rayDir * t;
-
-		if (point.x < 0.0f || point.x > terrainSize ||
-			point.z < 0.0f || point.z > terrainSize){
-			break;
-		}
-
-		float terrainHeight = terrain.GetHeightInterpolated(point.x, point.z);
-
-		if (point.y <= terrainHeight){
-			return glm::vec3(point.x, 0.0f, point.z);
-		}
-	}
-
-	return glm::vec3(rayOrigin.x, 0.0f, rayOrigin.z);
-}
-
-void AreaSelectorRenderer::Render()
+void AreaSelectorRenderer::Render(const Camera& camera, int segments)
 {
 	Shader& shader = Manager<Shader>::Get(m_ShaderID);
 	shader.Use();
 
-	glm::mat4 projection = m_Camera->GetProjectionMatrix();
+	glm::mat4 projection = camera.GetProjectionMatrix();
 	shader.SetMat4("projection", projection);
 
-	glm::mat4 view = m_Camera->GetViewMatrix();
+	glm::mat4 view = camera.GetViewMatrix();
 	shader.SetMat4("view", view);
 
 	glm::mat4 model = glm::mat4(1.0f);
@@ -147,7 +98,8 @@ void AreaSelectorRenderer::Render()
 
 	glBindVertexArray(m_Vao);
 	glLineWidth(10.0f);
-	glDrawArrays(GL_LINE_LOOP, 0, m_Segments);
+	glDrawArrays(GL_LINE_LOOP, 0, segments);
+	glBindVertexArray(0);
 }
 
 AreaSelectorRenderer::~AreaSelectorRenderer()
