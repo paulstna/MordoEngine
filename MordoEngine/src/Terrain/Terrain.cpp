@@ -207,6 +207,16 @@ void Terrain::RescaleData(float minRange, float maxRange)
 	p_IsScaled = true;
 }
 
+void Terrain::MarkVertexAsModified(int x, int z) {
+	m_ModifiedVertexIndices.push_back(index(x,z));
+	m_HasModifications = true;
+}
+
+void Terrain::ClearModifications() {
+	m_ModifiedVertexIndices.clear();
+	m_HasModifications = false;
+}
+
 std::size_t Terrain::index(std::size_t x, std::size_t z) const noexcept
 {
 	return z * p_HeightData.size + x;

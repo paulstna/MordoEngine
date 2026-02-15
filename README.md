@@ -22,9 +22,9 @@ The codebase evolves over time as I learn new concepts, improve the architecture
 - perlin noise
 
 ## Project Status
-Terrain Editor Preview (Terrain Selector Indicator), Yellow circles indicate selected terrain areas using mouse raycasting:
-![Triangle Renderer](imgs/2026-02-12-1.png)
-![Triangle Renderer](imgs/2026-02-12-2.png)
+Terrain Editor Preview, left click to raise terrain ( 7ms -> should be optimized in the future):
+![Triangle Renderer](imgs/2026-02-15-1.png)
+![Triangle Renderer](imgs/2026-02-15-2.png)
 
 ## Notes
 This is an educational and personal project focused on learning and experimentation.  

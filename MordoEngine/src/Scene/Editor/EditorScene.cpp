@@ -12,9 +12,19 @@ EditorScene::EditorScene(std::shared_ptr<terrain::Terrain> terrain, std::shared_
 
 void EditorScene::Update(float deltaTime)
 {
-	float velocity = 100.0f * m_Terrain->GetWorldScale() * deltaTime;
-	m_CameraController->Update(deltaTime, velocity);
-	m_EditorSystem->Update(*m_Terrain, *m_Camera);
+    float velocity = 100.0f * m_Terrain->GetWorldScale() * deltaTime;
+    m_CameraController->Update(deltaTime, velocity);
+    m_EditorSystem->Update(*m_Terrain, *m_Camera);
+
+
+    if (Input::LeftMousePressed()) {
+        m_EditorSystem->ModifyTerrain(*m_Terrain);
+    }
+
+    if (m_Terrain->HasModifications()) {
+        m_Renderer->UpdateBuffers(*m_Terrain);
+        m_Terrain->ClearModifications();  
+    }
 }
 
 void EditorScene::Render()
@@ -22,10 +32,10 @@ void EditorScene::Render()
 	glm::mat4 projection = m_Camera->GetProjectionMatrix();
 	glm::mat4 view = m_Camera->GetViewMatrix();
 	glm::mat4 model = glm::mat4(1.0f);
-	model = glm::translate(model, m_EditorSystem->GetWorldPosition());
 	glm::vec3 lightDir = glm::vec3(0.0f, 1.0f, 0.0f);
 
 	m_Renderer->Render(m_Camera->GetPosition(), &view, &projection, &model, &lightDir);
+	model = glm::translate(model, m_EditorSystem->GetWorldPosition());
 	m_EditorSystem->Render(&view, &projection, &model, nullptr);
 }
 

@@ -147,7 +147,7 @@
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Renderer\AreaSelectorRenderer.cpp" />
     <ClCompile Include="src\Renderer\Geomipmapping.cpp" />
-    <ClCompile Include="src\Renderer\LodManager .cpp" />
+    <ClCompile Include="src\Renderer\LodManager.cpp" />
     <ClCompile Include="src\Renderer\TriangleRenderer.cpp" />
     <ClCompile Include="src\Scene\Editor\Controllers\EditorCameraController.cpp" />
     <ClCompile Include="src\Scene\Editor\EditorScene.cpp" />

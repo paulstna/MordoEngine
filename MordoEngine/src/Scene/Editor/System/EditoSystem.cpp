@@ -1,5 +1,6 @@
 #include "EditorSystem.h"
 #include "../../../Renderer/AreaSelectorRenderer.h"
+#include <iostream>
 #include <glm/glm.hpp>
 
 EditorSystem::EditorSystem(Shader& areaSelectorShader)
@@ -68,9 +69,9 @@ glm::vec3 EditorSystem::RaycastToTerrain(
 }
 
 void EditorSystem::Render(glm::mat4* view,
-						  glm::mat4* projection,
-						  glm::mat4* model,
-						  glm::vec3* lightDir)
+	glm::mat4* projection,
+	glm::mat4* model,
+	glm::vec3* lightDir)
 {
 	m_Renderer->Render(view, projection, model, lightDir);
 }
@@ -78,4 +79,36 @@ void EditorSystem::Render(glm::mat4* view,
 glm::vec3 EditorSystem::GetWorldPosition() const
 {
 	return m_LastWorldPosition;
+}
+
+void EditorSystem::ModifyTerrain(terrain::Terrain& terrain)
+{
+	float worldScale = terrain.GetWorldScale();
+	int centerX = (int)(m_LastWorldPosition.x / worldScale);
+	int centerZ = (int)(m_LastWorldPosition.z / worldScale);
+	int size = terrain.GetSize();
+
+	for (int z = centerZ - m_Radius; z <= centerZ + m_Radius; ++z)
+	{
+		for (int x = centerX - m_Radius; x <= centerX + m_Radius; ++x)
+		{
+			if (x < 0 || z < 0 || x >= size || z >= size)
+				continue;
+
+			float dx = (float)(x - centerX);
+			float dz = (float)(z - centerZ);
+			float dist = sqrtf(dx * dx + dz * dz);
+
+			if (dist > m_Radius)
+				continue;
+
+			float t = dist / m_Radius;
+			float falloff = 1.0f - t;
+
+			float currentHeight = terrain.GetHeightAt(x, z);
+			float newHeight = currentHeight + falloff * m_BrushStrenght * terrain.GetHeightScale();
+			terrain.SetHeightAt(newHeight, x, z);
+			terrain.MarkVertexAsModified(x, z);
+		}
+	}
 }

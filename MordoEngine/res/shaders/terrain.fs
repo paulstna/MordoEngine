@@ -1,44 +1,42 @@
 #version 330 core
-
 in vec2 TexCoord;
-in vec3 Normal;
 in float Height;
+in vec3 Normal;
+in vec3 WorldPos;
 
 out vec4 FragColor;
 
-uniform sampler2D texture1; 
-uniform sampler2D texture2; 
-uniform sampler2D texture3; 
-
-uniform float heightThreshold1; 
-uniform float heightThreshold2; 
-uniform vec3 reverseLightDir;
-
-vec4 CalculateTexColor()
-{
-    vec3 color1 = texture(texture1, TexCoord).rgb;
-    vec3 color2 = texture(texture2, TexCoord).rgb;
-    vec3 color3 = texture(texture3, TexCoord).rgb;
-   
-    float blendWidth = 0.15;
-    float blend1to2 = smoothstep(heightThreshold1 - blendWidth, 
-                                 heightThreshold1 + blendWidth, 
-                                 Height);
-    float blend2to3 = smoothstep(heightThreshold2 - blendWidth, 
-                                 heightThreshold2 + blendWidth, 
-                                 Height);
-    
-    vec3 finalColor = mix(color1, color2, blend1to2);
-    finalColor = mix(finalColor, color3, blend2to3);
-    return vec4(finalColor, 1.0f);
-}
-
+uniform sampler2D texture1;
+uniform sampler2D texture2;
+uniform sampler2D texture3;
+uniform float heightThreshold1;
+uniform float heightThreshold2;
+uniform vec3 lightDir;
 
 void main()
 {
-    vec4 TexColor = CalculateTexColor();
-    vec3 Normal_ = normalize(Normal);
-    float Diffuse = dot(Normal_, reverseLightDir);
-    Diffuse = max(0.3f, Diffuse);
-    FragColor = TexColor * Diffuse;
+    // Ya viene escalado del vertex shader
+    vec3 grassColor = texture(texture1, TexCoord).rgb;
+    vec3 dirtColor = texture(texture2, TexCoord).rgb;
+    vec3 rockColor = texture(texture3, TexCoord).rgb;
+    
+    vec3 color;
+    if (Height < heightThreshold1) {
+        color = grassColor;
+    } else if (Height < heightThreshold2) {
+        float blend = (Height - heightThreshold1) / (heightThreshold2 - heightThreshold1);
+        color = mix(grassColor, dirtColor, blend);
+    } else {
+        float blend = smoothstep(heightThreshold2, heightThreshold2 + 0.1, Height);
+        color = mix(dirtColor, rockColor, blend);
+    }
+    
+    vec3 norm = normalize(Normal);
+    vec3 light = normalize(lightDir);
+    float diff = max(dot(norm, light), 0.0);
+    
+    vec3 ambient = 0.3 * color;
+    vec3 diffuse = 0.7 * diff * color;
+    
+    FragColor = vec4(ambient + diffuse, 1.0);
 }

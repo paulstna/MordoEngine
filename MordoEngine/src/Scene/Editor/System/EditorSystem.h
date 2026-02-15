@@ -11,8 +11,9 @@ class EditorSystem
 private:
 	std::unique_ptr<Renderer> m_Renderer;
 	int m_Segments = 256;
-	float m_Radius = 50.0f;
+	float m_Radius = 25.0f;
 	int m_HeightOffSet = 12.0f;
+	float m_BrushStrenght = 10.0f;
 	glm::vec3 m_LastWorldPosition;
 	glm::vec3 RaycastToTerrain(
 		const glm::vec3& rayOrigin,
@@ -26,4 +27,5 @@ public:
 				glm::mat4* model,
 				glm::vec3* lightDir);
 	glm::vec3 GetWorldPosition() const;
+	void ModifyTerrain(terrain::Terrain& terrain);
 };

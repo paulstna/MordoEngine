@@ -21,12 +21,13 @@ void GameScene::Render()
 {
 	glm::mat4 projection = m_Camera->GetProjectionMatrix();
 	glm::mat4 view = m_Camera->GetViewMatrix();
+	glm::mat4 model = glm::mat4(1.0f);
 	glm::vec3 lightDir = m_Sun->GetReverseLightDirection();
 	m_Renderer->Render(
 		m_Camera->GetPosition(),
 		&view,
 		&projection,
-		nullptr,
+		&model,
 		&lightDir
 	);
 }

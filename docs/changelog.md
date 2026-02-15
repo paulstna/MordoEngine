@@ -98,3 +98,8 @@
 - Refactored AreaSelectorRenderer to inherit from the base Renderer class
 - Refactored Render methods in Redenderer class to be more flexible and reusable across different renderers
 - Refactored Render methods in all Renderer subclasses
+
+## 2026-02-15
+- Implemented terrain editing in TerrainEditorScene using EditorSystem
+- Added height increment on left mouse click (unoptimized)
+- Refactor terrain vertex and fragment shaders 

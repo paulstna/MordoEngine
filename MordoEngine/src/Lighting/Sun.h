@@ -11,5 +11,5 @@ public:
 
 private:
 	float m_TimeOfDay = 0.0f; // 0 - 2pi 
-	float m_DaySpeed = 0.1f;  
+	float m_DaySpeed = 0.6f;  
 };

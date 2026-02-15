@@ -42,6 +42,10 @@ namespace terrain
 		std::size_t GetSize() const noexcept;
 		int GetWorldScale() const noexcept;
 
+		void MarkVertexAsModified(int x, int z);
+		void ClearModifications();
+		const std::vector<int>& GetModifiedVertices() const { return m_ModifiedVertexIndices; }
+		bool HasModifications() const { return m_HasModifications; }
 		virtual ~Terrain() = default;
 
 	protected:
@@ -58,6 +62,8 @@ namespace terrain
 		void RescaleData(float min, float max);
 
 	private:
+		std::vector<int> m_ModifiedVertexIndices;
+		bool m_HasModifications;
 		std::size_t index(std::size_t x, std::size_t z) const noexcept;
 	};
 

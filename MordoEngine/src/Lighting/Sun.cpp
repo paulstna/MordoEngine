@@ -24,6 +24,5 @@ glm::vec3 Sun::GetLightDirection()
 	float y = sin(m_TimeOfDay);
 	float z = cos(m_TimeOfDay);
 
-	return glm::normalize(glm::vec3(0, -1, 0));
-	//return glm::normalize(glm::vec3(x, y, z));
+	return glm::normalize(glm::vec3(x, y, z));
 }

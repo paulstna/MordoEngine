@@ -1,5 +1,6 @@
 #pragma once
 #include "../Core/Shader/Shader.h"
+#include "../Terrain/Terrain.h"
 #include <glm/vec3.hpp>
 
 class Renderer
@@ -32,9 +33,11 @@ public:
             p_Shader.SetMat4("model", *model);
         }
         if (lightDir) {
-            p_Shader.SetVec3("reverseLightDir", *lightDir);
+            p_Shader.SetVec3("lightDir", *lightDir);
         }
     }
+
+    virtual void UpdateBuffers(const terrain::Terrain& terrain) {};
     virtual void SetHeights(const std::vector<float>& heights, const glm::vec3& position) {};
 	virtual ~Renderer() = default;
 };
