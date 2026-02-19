@@ -148,6 +148,7 @@
     <ClCompile Include="src\Renderer\AreaSelectorRenderer.cpp" />
     <ClCompile Include="src\Renderer\Geomipmapping.cpp" />
     <ClCompile Include="src\Renderer\LodManager.cpp" />
+    <ClCompile Include="src\Renderer\SkyBoxRenderer.cpp" />
     <ClCompile Include="src\Renderer\TriangleRenderer.cpp" />
     <ClCompile Include="src\Scene\Editor\Controllers\EditorCameraController.cpp" />
     <ClCompile Include="src\Scene\Editor\Controllers\EditorInputHandlerController.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="src\Renderer\Geomipmapping.h" />
     <ClInclude Include="src\Renderer\LodManager.h" />
     <ClInclude Include="src\Renderer\Renderer.h" />
+    <ClInclude Include="src\Renderer\SkyBoxRenderer.h" />
     <ClInclude Include="src\Renderer\TriangleRenderer.h" />
     <ClInclude Include="src\Scene\Editor\Controllers\EditorCameraController.h" />
     <ClInclude Include="src\Scene\Editor\Controllers\EditorInputHandlerController.h" />
@@ -192,6 +194,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\maps\heightmap.raw" />
+    <None Include="res\shaders\skyBox.fs" />
+    <None Include="res\shaders\skyBox.vs" />
     <None Include="res\shaders\terrain.fs" />
     <None Include="res\shaders\terrain.vs" />
     <None Include="res\shaders\terrainSelector.fs" />

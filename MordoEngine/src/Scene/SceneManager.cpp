@@ -15,6 +15,7 @@ SceneManager::SceneManager() : m_ActiveScene(nullptr), m_ActiveSceneName("")
 	Input::DisableCursor();
 	// m_SharedTerrain = std::make_shared<HeightMapTerrain>("res/maps/heightmap.raw");
 	//m_SharedTerrain = std::make_unique<MidpointDisplacement>(1057, 3.0f, .8f, 0, terrain::RAW_HEIGHT_MAX);
+	// 1057 y 513
 	m_SharedTerrain = std::make_shared<FaultFormationTerrain>(1057, 3.0f, 50, 0, terrain::RAW_HEIGHT_MAX, 0.15f);
 	m_SharedTerrain->SetHeightScale(200.0f * m_SharedTerrain->GetWorldScale());
 

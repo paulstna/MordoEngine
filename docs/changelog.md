@@ -112,3 +112,10 @@
 - Added GameCameraController to manage camera input in the main game scene
 - Added an OnEntry method for Scenes to handle scene initialization logic or switching scenes
 - GameCameraController handles WASD movement and mouse look with terrain collision detection
+
+## 2026-02-18
+- Added a cubemap-loading constructor to the Texture class
+- Added skyBox vertex and fragment shaders for skybox rendering
+- Added cubemap textures for the skybox
+- Added SkyboxRenderer to render the skybox using the cubemap textures
+- Updated GameScene to include the SkyboxRenderer for rendering the skybox in the background

@@ -45,7 +45,7 @@ Texture::Texture(const std::string& texturePath) {
 
 Texture::Texture(const std::string& filePath, const std::vector<std::string>& faces)
 {
-	stbi_set_flip_vertically_on_load(true);
+	stbi_set_flip_vertically_on_load(false);
 	glGenTextures(1, &ID);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, ID);
 
@@ -71,7 +71,6 @@ Texture::Texture(const std::string& filePath, const std::vector<std::string>& fa
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
 				0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data
 			);
-			glGenerateMipmap(GL_TEXTURE_2D);
 		}
 		else {
 			std::cout << "Failed to load texture" << std::endl;
@@ -84,6 +83,8 @@ Texture::Texture(const std::string& filePath, const std::vector<std::string>& fa
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+	stbi_set_flip_vertically_on_load(true);
 }
 
 void Texture::Use() const {

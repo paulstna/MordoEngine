@@ -15,6 +15,7 @@ private:
 	std::shared_ptr<Renderer> m_Renderer;
 	std::unique_ptr<GameCameraController> m_CameraController;
 	std::unique_ptr<Sun> m_Sun;
+	std::unique_ptr<Renderer> m_SkyBoxRenderer;
 
 public:
 	GameScene(std::shared_ptr<terrain::Terrain> terrain, std::shared_ptr<Camera> camera, std::shared_ptr<Renderer> renderer);

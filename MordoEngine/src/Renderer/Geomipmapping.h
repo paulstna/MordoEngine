@@ -59,7 +59,6 @@ private:
     unsigned int CreateTriangleFan(int index, std::vector<unsigned int>& indices,
         int lodCore, int lodLeft, int lodRight, int lodTop, int lodBottom, int x, int z);
     int Powi(int base, int exp);
-    void RecalculateNormalsSimpleMask(const std::vector<bool>& affectedMask);
 
 public:
     Geomipmapping(Shader& shader, const terrain::Terrain& terrain, int patchSize);

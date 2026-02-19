@@ -7,14 +7,19 @@
 template<>
 void Manager<Texture>::Init() {
 
-	std::vector<std::string> cubeMapFaces = {
-			"right.tga", "left.tga", "top.tga", "bottom.tga", "front.tga", "back.tga"
-	};
+    std::vector<std::string> cubeMapFaces = {
+        "right.tga",
+        "left.tga",
+        "top.tga",
+        "bottom.tga",
+        "back.tga",    
+        "front.tga"
+    };
 
 	resources.emplace("grass", Texture(FileSystem::getPath("res/textures/grass_low.png")));
 	resources.emplace("dirt", Texture(FileSystem::getPath("res/textures/dirt_mid.jpg")));
 	resources.emplace("rock", Texture(FileSystem::getPath("res/textures/rock_high.png")));
-	resources.emplace("cubemap", Texture(FileSystem::getPath("res/textures/cubemap/"), cubeMapFaces));
+	resources.emplace("skyBox", Texture(FileSystem::getPath("res/textures/cubemap/"), cubeMapFaces));
 }
 
 template class Manager<Texture>;

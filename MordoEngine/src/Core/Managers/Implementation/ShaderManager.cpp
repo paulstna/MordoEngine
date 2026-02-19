@@ -4,9 +4,9 @@
 
 template<>
 void Manager<Shader>::Init() {
-	resources.emplace("terrain", 
+	resources.emplace("terrain",
 		std::move(Shader(
-			FileSystem::getPath("res/shaders/terrain.vs"), 
+			FileSystem::getPath("res/shaders/terrain.vs"),
 			FileSystem::getPath("res/shaders/terrain.fs"))
 		));
 
@@ -14,6 +14,12 @@ void Manager<Shader>::Init() {
 		std::move(Shader(
 			FileSystem::getPath("res/shaders/terrainSelector.vs"),
 			FileSystem::getPath("res/shaders/terrainSelector.fs"))
+		));
+
+	resources.emplace("skyBox",
+		std::move(Shader(
+			FileSystem::getPath("res/shaders/skyBox.vs"),
+			FileSystem::getPath("res/shaders/skyBox.fs"))
 		));
 }
 

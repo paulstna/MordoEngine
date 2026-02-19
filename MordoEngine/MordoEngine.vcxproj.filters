@@ -93,6 +93,9 @@
     <ClCompile Include="src\Scene\Game\Controllers\GameCameraController.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\Renderer\SkyBoxRenderer.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\API\OpenGL\OpenGLBackend.h">
@@ -173,6 +176,9 @@
     <ClInclude Include="src\Scene\Game\Controllers\GameCameraController.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="src\Renderer\SkyBoxRenderer.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\terrain.vs" />
@@ -180,6 +186,8 @@
     <None Include="res\maps\heightmap.raw" />
     <None Include="res\shaders\terrainSelector.vs" />
     <None Include="res\shaders\terrainSelector.fs" />
+    <None Include="res\shaders\skyBox.fs" />
+    <None Include="res\shaders\skyBox.vs" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\dirt_mid.png">
