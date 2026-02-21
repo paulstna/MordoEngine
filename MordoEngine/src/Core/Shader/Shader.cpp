@@ -30,7 +30,9 @@ Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentS
 }
 
 Shader::~Shader() {
-	glDeleteProgram(ID);
+	if (ID != 0) {
+		glDeleteProgram(ID);
+	}
 }
 
 void Shader::Use() const {
@@ -84,7 +86,7 @@ void Shader::SetFloat(const std::string& name, float value) const
 
 void Shader::SetVec2(const std::string& name, const glm::vec2& value) const
 {
-	glUniform2fv(glGetUniformLocation(ID, name.c_str()),1,&value[0]);
+	glUniform2fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
 }
 
 void Shader::SetVec3(const std::string& name, const glm::vec3& value) const

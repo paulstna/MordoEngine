@@ -10,8 +10,8 @@ public:
 	Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
 	~Shader();
 	Shader(const Shader&) = delete;
-	Shader& operator=(const Shader&) = delete;
 	Shader(Shader&& other) noexcept;
+	Shader& operator=(const Shader&) = delete;
 	Shader& operator=(Shader&& other) noexcept;
 	void Use() const;
 	void SetInt(const std::string& name, int value) const;

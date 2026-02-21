@@ -5,22 +5,22 @@
 template<>
 void Manager<Shader>::Init() {
 	resources.emplace("terrain",
-		std::move(Shader(
+		Shader(
 			FileSystem::getPath("res/shaders/terrain.vs"),
 			FileSystem::getPath("res/shaders/terrain.fs"))
-		));
+	);
 
 	resources.emplace("terrainSelector",
-		std::move(Shader(
+		Shader(
 			FileSystem::getPath("res/shaders/terrainSelector.vs"),
 			FileSystem::getPath("res/shaders/terrainSelector.fs"))
-		));
+	);
 
 	resources.emplace("skyBox",
-		std::move(Shader(
+		Shader(
 			FileSystem::getPath("res/shaders/skyBox.vs"),
 			FileSystem::getPath("res/shaders/skyBox.fs"))
-		));
+	);
 }
 
 template class Manager<Shader>;

@@ -90,3 +90,27 @@ Texture::Texture(const std::string& filePath, const std::vector<std::string>& fa
 void Texture::Use() const {
 	glBindTexture(GL_TEXTURE_2D, ID);
 }
+
+Texture::Texture(Texture&& other) noexcept : ID(other.ID)
+{
+	other.ID = 0;
+}
+
+Texture& Texture::operator=(Texture&& other) noexcept
+{
+	if (this != &other)
+	{
+		glDeleteTextures(1, &ID);
+		ID = other.ID;
+		other.ID = 0;
+	}
+
+	return *this;
+}
+
+Texture::~Texture()
+{
+	if (ID != 0) {
+		glDeleteTextures(1, &ID);
+	}
+}
