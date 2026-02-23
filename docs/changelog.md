@@ -121,4 +121,7 @@
 - Updated GameScene to include the SkyboxRenderer for rendering the skybox in the background
 
 ## 2026-02-22
-- Replaced test Sun class light with a DirLight class that calculates sun direction based on time of day.
+- Replaced test Sun class light with a DirLight class that calculates sun direction based on time of day
+- Added a CubeRenderer class for rendering point light sources as small cubes in the scene.
+- Added vertex and fragment shaders for rendering white point light cubes (used by CubeRenderer).
+- Added a PointLight class that handles point light data and properties.
