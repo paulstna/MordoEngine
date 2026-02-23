@@ -70,10 +70,9 @@ glm::vec3 EditorSystem::RaycastToTerrain(
 
 void EditorSystem::Render(glm::mat4* view,
 	glm::mat4* projection,
-	glm::mat4* model,
-	glm::vec3* lightDir)
+	glm::mat4* model)
 {
-	m_Renderer->Render(view, projection, model, lightDir);
+	m_Renderer->Render(view, projection, model);
 }
 
 glm::vec3 EditorSystem::GetWorldPosition() const

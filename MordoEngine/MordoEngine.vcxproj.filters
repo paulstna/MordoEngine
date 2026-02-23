@@ -63,7 +63,7 @@
     <ClCompile Include="src\Terrain\MidpointDisplacement.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="src\Lighting\Sun.cpp">
+    <ClCompile Include="src\Lighting\DirLight\DirLight.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="src\Renderer\Geomipmapping.cpp">
@@ -94,6 +94,15 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="src\Renderer\SkyBoxRenderer.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Renderer\Cube\CubePointLightRenderer.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lighting\PointLight\PointLight.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lighting\LightSystem.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -146,7 +155,7 @@
     <ClInclude Include="src\Terrain\MidpointDisplacement.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="src\Lighting\Sun.h">
+    <ClInclude Include="src\Lighting\DirLight\DirLight.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="src\Renderer\Geomipmapping.h">
@@ -179,6 +188,21 @@
     <ClInclude Include="src\Renderer\SkyBoxRenderer.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="src\Lighting\PointLight\PointLight.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Renderer\Cube\CubePointLightRenderer.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lighting\PointLight\PointLightData.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lighting\LightSystem.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lighting\DirLight\DirLightData.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\terrain.vs" />
@@ -188,6 +212,8 @@
     <None Include="res\shaders\terrainSelector.fs" />
     <None Include="res\shaders\skyBox.fs" />
     <None Include="res\shaders\skyBox.vs" />
+    <None Include="res\shaders\light_cube.vs" />
+    <None Include="res\shaders\light_cube.fs" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\dirt_mid.png">

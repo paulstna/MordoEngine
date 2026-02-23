@@ -30,8 +30,7 @@ public:
 	void Update(const terrain::Terrain& terrain, const Camera& camera);
 	void Render(glm::mat4* view,
 				glm::mat4* projection,
-				glm::mat4* model,
-				glm::vec3* lightDir);
+				glm::mat4* model);
 	glm::vec3 GetWorldPosition() const;
 	void IncreaseSelector();
 	void DecreaseSelector();

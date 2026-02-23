@@ -143,10 +143,13 @@
     <ClCompile Include="src\Core\Texture\Texture.cpp" />
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\Input\Input.cpp" />
-    <ClCompile Include="src\Lighting\Sun.cpp" />
+    <ClCompile Include="src\Lighting\LightSystem.cpp" />
+    <ClCompile Include="src\Lighting\PointLight\PointLight.cpp" />
+    <ClCompile Include="src\Lighting\DirLight\DirLight.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Renderer\AreaSelectorRenderer.cpp" />
     <ClCompile Include="src\Renderer\Geomipmapping.cpp" />
+    <ClCompile Include="src\Renderer\Cube\CubePointLightRenderer.cpp" />
     <ClCompile Include="src\Renderer\LodManager.cpp" />
     <ClCompile Include="src\Renderer\SkyBoxRenderer.cpp" />
     <ClCompile Include="src\Renderer\TriangleRenderer.cpp" />
@@ -172,9 +175,14 @@
     <ClInclude Include="src\Core\Texture\Texture.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\Input\Input.h" />
-    <ClInclude Include="src\Lighting\Sun.h" />
+    <ClInclude Include="src\Lighting\DirLight\DirLightData.h" />
+    <ClInclude Include="src\Lighting\LightSystem.h" />
+    <ClInclude Include="src\Lighting\PointLight\PointLight.h" />
+    <ClInclude Include="src\Lighting\PointLight\PointLightData.h" />
+    <ClInclude Include="src\Lighting\DirLight\DirLight.h" />
     <ClInclude Include="src\Renderer\AreaSelectorRenderer.h" />
     <ClInclude Include="src\Renderer\Geomipmapping.h" />
+    <ClInclude Include="src\Renderer\Cube\CubePointLightRenderer.h" />
     <ClInclude Include="src\Renderer\LodManager.h" />
     <ClInclude Include="src\Renderer\Renderer.h" />
     <ClInclude Include="src\Renderer\SkyBoxRenderer.h" />
@@ -194,6 +202,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\maps\heightmap.raw" />
+    <None Include="res\shaders\light_cube.fs" />
+    <None Include="res\shaders\light_cube.vs" />
     <None Include="res\shaders\skyBox.fs" />
     <None Include="res\shaders\skyBox.vs" />
     <None Include="res\shaders\terrain.fs" />

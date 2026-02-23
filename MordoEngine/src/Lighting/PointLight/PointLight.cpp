@@ -6,7 +6,7 @@ PointLight::PointLight(const glm::vec3 position) : m_Renderer(std::make_unique<C
 	m_Data.position = position;
 	m_Data.ambient = glm::vec3(0.05f);
 	m_Data.diffuse = glm::vec3(1.0f);
-	m_Data.specular = glm::vec3(1.0f);
+	m_Data.specular = glm::vec3(.2f);
 	m_Data.constant = 1.0f;
 	m_Data.linear = 0.0014f;
 	m_Data.quadratic = 0.000007f;

@@ -24,11 +24,12 @@ void EditorScene::Render()
 	glm::mat4 projection = m_Camera->GetProjectionMatrix();
 	glm::mat4 view = m_Camera->GetViewMatrix();
 	glm::mat4 model = glm::mat4(1.0f);
-	glm::vec3 lightDir = glm::vec3(0.0f, 1.0f, 0.0f);
+	//glm::vec3 lightDir = glm::vec3(0.0f, 1.0f, 0.0f);
 
-	m_Renderer->Render(m_Camera->GetPosition(), &view, &projection, &model, &lightDir);
+	Manager<Shader>::Get("terrain").Use();
+	m_Renderer->Render(m_Camera->GetPosition(), &view, &projection, &model);
 	model = glm::translate(model, m_EditorSystem->GetWorldPosition());
-	m_EditorSystem->Render(&view, &projection, &model, nullptr);
+	m_EditorSystem->Render(&view, &projection, &model);
 }
 
 EditorScene::~EditorScene()
