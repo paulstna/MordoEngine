@@ -22,8 +22,8 @@ The codebase evolves over time as I learn new concepts, improve the architecture
 - perlin noise
 
 ## Project Status
-Terrain, Skybox rendering, Directional and Point lighting rendering:
-![CubeMap/SkyBoxRender](imgs/2026-02-22.png)
+Terrain, Skybox, Directional and Multiple Point lighting rendering:
+![CubeMap/SkyBoxRender](imgs/2026-02-28.png)
 
 ## Notes
 This is an educational and personal project focused on learning and experimentation.  

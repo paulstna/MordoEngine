@@ -30,8 +30,9 @@ struct PointLight {
     float quadratic;
 };
 
-uniform PointLight pointLight;
-
+#define MAX_POINT_LIGHTS 16
+uniform int numPointLights;
+uniform PointLight pointLights[MAX_POINT_LIGHTS];
 
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 color)
 {
@@ -85,7 +86,10 @@ void main()
     vec3 norm = normalize(Normal);
 
     vec3 result = CalcDirLight(dirLight, norm, color);
-    result     += CalcPointLight(pointLight, norm, WorldPos, color);
+
+    for (int i=0; i<numPointLights; i++){
+        result += CalcPointLight(pointLights[i], norm, WorldPos, color);
+    }
 
     FragColor = vec4(result, 1.0);
 }

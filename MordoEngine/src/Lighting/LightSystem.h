@@ -8,6 +8,7 @@
 class LightSystem
 {
 private:
+	const int MAX_POINT_IGHTS = 16;
 	std::vector<PointLight> m_PointLights;
 	std::unique_ptr<DirLight> m_DirLight;
 
@@ -19,5 +20,6 @@ public:
 				const glm::mat4* projection,
 				const glm::mat4* view,
 				const glm::mat4* model);
+	void AddPointLight(PointLight&& pointLight);
 	~LightSystem();
 };

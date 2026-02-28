@@ -27,7 +27,7 @@ public:
 	glm::vec3 GetMiddleTerrainPosition() const;
 	int GetTerrainWorldScale() const;
 	float GetTerrainHeightScale() const;
-	float GetTerrainInterpolatedHeightAt(float x, float z, float yOffset = 0) const;
+	float GetTerrainInterpolatedHeightAt(float x, float z, float yOffSet = 0) const;
 	terrain::Terrain& GetTerrain() const;
 	void CheckForModifications();
 	~TerrainSystem();

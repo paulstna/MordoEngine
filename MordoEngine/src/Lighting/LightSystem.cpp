@@ -5,7 +5,7 @@
 
 LightSystem::LightSystem() : m_DirLight(std::make_unique<DirLight>(0.9f))
 {
-	m_PointLights.push_back(PointLight(glm::vec3(928.f, 400.0f, 928.f)));
+
 }
 
 void LightSystem::Update(float deltaTime)
@@ -20,7 +20,9 @@ void LightSystem::Render(const Shader& shader,
 						 const glm::mat4* model)
 {
 	const Shader& lightCubeShader = Manager<Shader>::Get("light_cube");
-	m_PointLights[0].Render(lightCubeShader, projection, view, nullptr);
+	for (int i = 0; i < m_PointLights.size(); i++) {
+		m_PointLights[i].Render(lightCubeShader, projection, view, nullptr);
+	}
 
 	shader.Use();
 	shader.SetVec3("viewPos", cameraPos);
@@ -30,14 +32,22 @@ void LightSystem::Render(const Shader& shader,
 	shader.SetVec3("dirLight.ambient", dirLight.ambient);
 	shader.SetVec3("dirLight.diffuse", dirLight.diffuse);
 
-	const PointLightData& pointLight = m_PointLights[0].GetData();
-	shader.SetVec3("pointLight.position", pointLight.position);
-	shader.SetVec3("pointLight.ambient", pointLight.ambient);
-	shader.SetVec3("pointLight.diffuse", pointLight.diffuse);
-	shader.SetVec3("pointLight.specular", pointLight.specular);
-	shader.SetFloat("pointLight.constant", pointLight.constant);
-	shader.SetFloat("pointLight.linear", pointLight.linear);
-	shader.SetFloat("pointLight.quadratic", pointLight.quadratic);
+	shader.SetInt("numPointLights", m_PointLights.size());
+	for (int i = 0; i < m_PointLights.size() && i < MAX_POINT_IGHTS; i++) {
+		const PointLightData& pointLight = m_PointLights[i].GetData();
+		shader.SetVec3("pointLights[" + std::to_string(i) + "].position", pointLight.position);
+		shader.SetVec3("pointLights[" + std::to_string(i) + "].ambient", pointLight.ambient);
+		shader.SetVec3("pointLights[" + std::to_string(i) + "].diffuse", pointLight.diffuse);
+		shader.SetVec3("pointLights[" + std::to_string(i) + "].specular", pointLight.specular);
+		shader.SetFloat("pointLights[" + std::to_string(i) + "].constant", pointLight.constant);
+		shader.SetFloat("pointLights[" + std::to_string(i) + "].linear", pointLight.linear);
+		shader.SetFloat("pointLights[" + std::to_string(i) + "].quadratic", pointLight.quadratic);
+	}
+}
+
+void LightSystem::AddPointLight(PointLight&& pointLight)
+{
+	m_PointLights.push_back(std::move(pointLight));
 }
 
 LightSystem::~LightSystem()

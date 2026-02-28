@@ -72,10 +72,10 @@ float TerrainSystem::GetTerrainHeightScale() const
 	return m_Terrain->GetHeightScale();
 }
 
-float TerrainSystem::GetTerrainInterpolatedHeightAt(float x, float z, float yOffset) const
+float TerrainSystem::GetTerrainInterpolatedHeightAt(float x, float z, float yOffSet) const
 {
 	return m_Terrain->GetHeightInterpolated(x, z) +
-		yOffset * m_Terrain->GetHeightScale();
+		yOffSet * m_Terrain->GetHeightScale();
 }
 
 terrain::Terrain& TerrainSystem::GetTerrain() const

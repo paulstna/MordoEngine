@@ -36,3 +36,8 @@ void PointLight::Render(const Shader& shader,
 
 	m_Renderer->Render();
 }
+
+void PointLight::SetPosition(const glm::vec3& position)
+{
+	m_Data.position = position;
+}
